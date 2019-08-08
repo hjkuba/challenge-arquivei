@@ -22,20 +22,24 @@ export const styles = css`
     }
 
     .purchase-template__purchase-section {
-        flex: 1;
+        flex: 3;
+        display: flex;
+        flex-direction: column;
         margin-right: 60px;
+    }
+
+    .purchase-template__input-container {
+        width: 260px;
+        margin-bottom: 20px;
+    }
+
+    .purchase-template__button-container {
+        margin-top: 24px;
+        align-self: flex-end;
     }
 
     .purchase-template__purchase-section > :global(.purchase-summary-table) {
         margin: 24px 0;
-    }
-
-    .purchase-template__purchase-section > :global(.input) {
-        margin-bottom: 24px;
-    }
-
-    .purchase-template__purchase-section > :global(.button) {
-        margin-top: 24px;
     }
 
     .purchase-template__divider {
@@ -44,7 +48,7 @@ export const styles = css`
     }
 
     .purchase-template__offer-section {
-        flex: 1;
+        flex: 2;
     }
 
     .purchase-template__offer-text {

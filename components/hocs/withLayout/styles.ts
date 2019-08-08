@@ -3,6 +3,12 @@ import { COLOR_PRIMARY } from '../../../constants/colors';
 import { SIZE_HERO } from '../../../constants/typography';
 
 export const styles = css`
+    .layout {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
     .layout__title {
         margin: 0;
         padding: 24px 0 24px 0;

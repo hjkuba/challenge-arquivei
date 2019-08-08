@@ -1,6 +1,6 @@
 import css from 'styled-jsx/css';
-import { SIZE_TITLE, SIZE_HERO, SIZE_LINK } from '../../constants/typography';
-import { COLOR_DARK, COLOR_PRIMARY, COLOR_GREY_100 } from '../../constants/colors';
+import { SIZE_TITLE, SIZE_HERO } from '../../constants/typography';
+import { COLOR_DARK, COLOR_GREY_100 } from '../../constants/colors';
 
 export const styles = css`
     .profile {
@@ -44,8 +44,6 @@ export const styles = css`
 
     .profile__logout {
         align-self: flex-end;
-        color: ${COLOR_PRIMARY};
-        font-size: ${SIZE_LINK};
     }
 
     .profile > :global(.label-text) {

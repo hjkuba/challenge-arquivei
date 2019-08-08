@@ -5,13 +5,13 @@ const PurchaseSummaryTable = (): ReactElement => {
     return (
         <div className="purchase-summary-table">
             <h2 className="purchase-summary-table__title">Detalhes da compra</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Consultas</th>
-                        <th>Valor unitário</th>
-                        <th>Total</th>
-                    </tr>
+            <table className="purchase-summary-table__table">
+                <thead className="purchase-summary-table__thead">
+                    <th>Consultas</th>
+                    <th>Valor unitário</th>
+                    <th>Total</th>
+                </thead>
+                <tbody className="purchase-summary-table__tbody">
                     <tr>
                         <td>100</td>
                         <td>R$0,09</td>
@@ -27,12 +27,20 @@ const PurchaseSummaryTable = (): ReactElement => {
                         <td>R$0,24</td>
                         <td>R$24,00</td>
                     </tr>
-                </thead>
+                </tbody>
             </table>
-            <h3>Total de consultas</h3>
-            <p>300</p>
-            <h3>Total a pagar</h3>
-            <p>R$49,00</p>
+            <table>
+                <thead className="purchase-summary-table__total-thead">
+                    <th>Total de Consultas</th>
+                    <th>Total a Pagar</th>
+                </thead>
+                <tbody className="purchase-summary-table__total-tbody">
+                    <tr>
+                        <td>300</td>
+                        <td>R$49,00</td>
+                    </tr>
+                </tbody>
+            </table>
             <style jsx>{styles}</style>
         </div>
     );

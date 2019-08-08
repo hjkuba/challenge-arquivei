@@ -17,7 +17,9 @@ const ProfileTemplate = (): ReactElement => {
                 <p className="profile__query-quantity">10</p>
                 <p className="profile__query-label">Consultas</p>
             </HighlightBox>
-            <Button label="Sair" type={Button.types.PRIMARY_ALT} />
+            <div className="profile__logout">
+                <Button label="Sair" type={Button.types.PRIMARY_ALT} />
+            </div>
             <style jsx>{styles}</style>
         </section>
     );

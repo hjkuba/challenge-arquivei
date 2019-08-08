@@ -11,11 +11,15 @@ const PurchaseTemplate = (): ReactElement => {
             <h2 className="purchase-template__title">Adquira mais Consultas</h2>
             <div className="purchase-template__content">
                 <div className="purchase-template__purchase-section">
-                    <Input type={Input.types.NUMBER} label="Quantidade de Consultas" />
+                    <div className="purchase-template__input-container">
+                        <Input type={Input.types.NUMBER} label="Quantidade de Consultas" />
+                    </div>
                     <hr className="purchase-template__divider" />
                     <PurchaseSummaryTable />
                     <hr className="purchase-template__divider" />
-                    <Button label="Comprar" type={Button.types.PRIMARY} />
+                    <div className="purchase-template__button-container">
+                        <Button label="Comprar" type={Button.types.PRIMARY} />
+                    </div>
                 </div>
                 <div className="purchase-template__offer-section">
                     <HighlightBox type={HighlightBox.types.GREY_100} alignment={HighlightBox.alignment.LEFT}>
