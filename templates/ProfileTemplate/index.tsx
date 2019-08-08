@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import LabelText from '../../components/LabelText';
-import Button, { ButtonType } from '../../components/Button';
-import HighlightBox, { HighlightBoxType } from '../../components/HighlightBox';
+import Button from '../../components/Button';
+import HighlightBox from '../../components/HighlightBox';
 import { styles } from './styles';
 
 const ProfileTemplate = (): ReactElement => {
@@ -12,12 +12,12 @@ const ProfileTemplate = (): ReactElement => {
             <LabelText label="Nome Fantasia">Full Fantasia</LabelText>
             <LabelText label="CNPJ">90.432.098/0001-12</LabelText>
             <hr className="profile__divider" />
-            <h2 className="profile__title">Saldo Disponível</h2>
-            <HighlightBox type={HighlightBoxType.SUCCESS}>
+            <h2 className="profile__balance">Saldo Disponível</h2>
+            <HighlightBox type={HighlightBox.types.SUCCESS} alignment={HighlightBox.alignment.CENTER}>
                 <p className="profile__query-quantity">10</p>
                 <p className="profile__query-label">Consultas</p>
             </HighlightBox>
-            <Button label="Sair" type={ButtonType.PRIMARY_ALT} />
+            <Button label="Sair" type={Button.types.PRIMARY_ALT} />
             <style jsx>{styles}</style>
         </section>
     );
