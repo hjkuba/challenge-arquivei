@@ -1,7 +1,7 @@
 import css from 'styled-jsx/css';
 
 export const styles = css`
-    .checkout {
+    .checkout-view {
         display: flex;
         flex: 1;
         flex-direction: column;
