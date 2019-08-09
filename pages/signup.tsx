@@ -1,14 +1,14 @@
 import { NextPage } from 'next';
 import { ReactElement } from 'react';
 import Layout from '../components/Layout';
-import HomeView from '../views/HomeView';
+import SignupView from '../views/SignupView';
 
-const HomePage: NextPage = (): ReactElement => {
+const SignupPage: NextPage = (): ReactElement => {
     return (
         <Layout>
-            <HomeView />
+            <SignupView />
         </Layout>
     );
 };
 
-export default HomePage;
+export default SignupPage;

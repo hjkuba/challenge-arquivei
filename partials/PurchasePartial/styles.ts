@@ -4,81 +4,81 @@ import { COLOR_DARK, COLOR_GREY_100 } from '../../constants/colors';
 import { SCREEN_MD_MAX_WIDTH } from '../../constants/sizes';
 
 export const styles = css`
-    .purchase-template {
+    .purchase-partial {
         flex: 4;
         padding: 30px;
     }
 
-    .purchase-template__title {
+    .purchase-partial__title {
         font-size: ${SIZE_TITLE};
         font-weight: bold;
         margin-top: 0;
         color: ${COLOR_DARK};
     }
 
-    .purchase-template__content {
+    .purchase-partial__content {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         flex-wrap: wrap-reverse;
     }
 
-    .purchase-template__purchase-section {
+    .purchase-partial__purchase-section {
         flex: 3;
         display: flex;
         flex-direction: column;
         margin-right: 60px;
     }
 
-    .purchase-template__input-container {
+    .purchase-partial__input-container {
         width: 260px;
         margin-bottom: 20px;
     }
 
-    .purchase-template__button-container {
+    .purchase-partial__button-container {
         margin-top: 24px;
         align-self: flex-end;
     }
 
-    .purchase-template__purchase-section > :global(.purchase-summary-table) {
+    .purchase-partial__purchase-section > :global(.purchase-summary-table) {
         margin: 24px 0;
     }
 
-    .purchase-template__divider {
+    .purchase-partial__divider {
         margin: 0;
         border-color: ${COLOR_GREY_100};
     }
 
-    .purchase-template__offer-section {
+    .purchase-partial__offer-section {
         flex: 2;
     }
 
-    .purchase-template__offer-text {
+    .purchase-partial__offer-text {
         color: ${COLOR_DARK};
         margin: 0 0 8px 0;
         font-size: ${SIZE_BODY};
     }
 
-    .purchase-template__offer-value {
+    .purchase-partial__offer-value {
         font-weight: bold;
     }
 
-    .purchase-template__offer-secondary-text {
+    .purchase-partial__offer-secondary-text {
         font-size: ${SIZE_CTA};
         color: ${COLOR_DARK};
         margin: 6px 0 0 0;
     }
 
     @media (max-width: ${SCREEN_MD_MAX_WIDTH}) {
-        .purchase-template__content {
+        .purchase-partial__content {
             flex-direction: column-reverse;
         }
 
-        .purchase-template__purchase-section {
+        .purchase-partial__purchase-section {
             margin-right: 0;
         }
 
-        .purchase-template__offer-section {
+        .purchase-partial__offer-section {
             margin-bottom: 30px;
         }
     }

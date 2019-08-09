@@ -3,54 +3,54 @@ import { SIZE_TITLE, SIZE_HERO } from '../../constants/typography';
 import { COLOR_DARK, COLOR_GREY_100 } from '../../constants/colors';
 
 export const styles = css`
-    .profile {
+    .profile-partial {
         padding: 30px;
         display: flex;
         flex: 1;
         flex-direction: column;
     }
 
-    .profile__title {
+    .profile-partial__title {
         font-size: ${SIZE_TITLE};
         font-weight: bold;
         margin-top: 0;
         color: ${COLOR_DARK};
     }
 
-    .profile__divider {
+    .profile-partial__divider {
         border-color: ${COLOR_GREY_100};
         width: 100%;
     }
 
-    .profile__balance {
+    .profile-partial__balance {
         font-size: ${SIZE_TITLE};
         font-weight: bold;
         color: ${COLOR_DARK};
     }
 
-    .profile__query-quantity {
+    .profile-partial__query-quantity {
         font-size: ${SIZE_HERO};
         color: white;
         font-weight: bold;
         margin: 0 0 10px 0;
     }
 
-    .profile__query-label {
+    .profile-partial__query-label {
         font-size: ${SIZE_TITLE};
         color: white;
         font-weight: bold;
         margin: 0;
     }
 
-    .profile__logout {
+    .profile-partial__logout {
         align-self: flex-end;
     }
 
-    .profile > :global(.label-text) {
+    .profile-partial > :global(.label-text) {
         margin-bottom: 10px;
     }
 
-    .profile > :global(.highlight-box) {
+    .profile-partial > :global(.highlight-box) {
         margin-bottom: 18px;
     }
 `;
