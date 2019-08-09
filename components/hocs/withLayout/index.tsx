@@ -5,11 +5,11 @@ import { styles } from './styles';
 const withLayout = (Page: NextPage): Function => {
     const Layout: NextPage = (): ReactElement => {
         return (
-            <div className="layout">
-                <h1 className="layout__title">Arquivei Front-End Challenge</h1>
+            <main className="layout">
+                <h1 className="layout__title">Arquivei FrontEnd Challenge</h1>
                 <Page />
                 <style jsx>{styles}</style>
-            </div>
+            </main>
         );
     };
 

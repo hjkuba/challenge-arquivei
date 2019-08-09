@@ -6,7 +6,7 @@ interface Props {
     type: ButtonType;
 }
 
-export enum ButtonType {
+enum ButtonType {
     PRIMARY = 'button--primary',
     PRIMARY_ALT = 'button--primary-alt',
 }
@@ -19,5 +19,7 @@ const Button = ({ label, type }: Props): ReactElement => {
         </button>
     );
 };
+
+Button.types = ButtonType;
 
 export default Button;

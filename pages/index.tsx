@@ -7,11 +7,13 @@ import { styles } from './styles';
 
 const HomePage: NextPage = (): ReactElement => {
     return (
-        <main className="home">
-            <ProfileTemplate />
-            <PurchaseTemplate />
+        <div className="home">
+            <div className="home__templates-container">
+                <ProfileTemplate />
+                <PurchaseTemplate />
+            </div>
             <style jsx>{styles}</style>
-        </main>
+        </div>
     );
 };
 
