@@ -12,7 +12,7 @@ const PurchaseTemplate = (): ReactElement => {
             <div className="purchase-template__content">
                 <div className="purchase-template__purchase-section">
                     <div className="purchase-template__input-container">
-                        <Input type={Input.types.NUMBER} label="Quantidade de Consultas" />
+                        <Input type={Input.types.NUMBER} label="Quantas consultas deseja?" />
                     </div>
                     <hr className="purchase-template__divider" />
                     <PurchaseSummaryTable />

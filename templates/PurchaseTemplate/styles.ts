@@ -1,6 +1,7 @@
 import css from 'styled-jsx/css';
-import { SIZE_TITLE, SIZE_CTA } from '../../constants/typography';
+import { SIZE_TITLE, SIZE_CTA, SIZE_BODY } from '../../constants/typography';
 import { COLOR_DARK, COLOR_GREY_100 } from '../../constants/colors';
+import { SCREEN_MD_MAX_WIDTH } from '../../constants/sizes';
 
 export const styles = css`
     .purchase-template {
@@ -19,6 +20,7 @@ export const styles = css`
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        flex-wrap: wrap-reverse;
     }
 
     .purchase-template__purchase-section {
@@ -53,8 +55,8 @@ export const styles = css`
 
     .purchase-template__offer-text {
         color: ${COLOR_DARK};
-        margin: 0 0 6px 0;
-        font-size: ${SIZE_TITLE};
+        margin: 0 0 8px 0;
+        font-size: ${SIZE_BODY};
     }
 
     .purchase-template__offer-value {
@@ -65,5 +67,19 @@ export const styles = css`
         font-size: ${SIZE_CTA};
         color: ${COLOR_DARK};
         margin: 6px 0 0 0;
+    }
+
+    @media (max-width: ${SCREEN_MD_MAX_WIDTH}) {
+        .purchase-template__content {
+            flex-direction: column-reverse;
+        }
+
+        .purchase-template__purchase-section {
+            margin-right: 0;
+        }
+
+        .purchase-template__offer-section {
+            margin-bottom: 30px;
+        }
     }
 `;

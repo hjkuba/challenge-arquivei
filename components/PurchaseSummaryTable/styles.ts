@@ -21,7 +21,7 @@ export const styles = css`
     }
 
     .purchase-summary-table__thead th {
-        padding: 6px 14px 6px 0;
+        padding: 6px 40px 6px 0;
     }
 
     .purchase-summary-table__tbody {
@@ -30,7 +30,7 @@ export const styles = css`
     }
 
     .purchase-summary-table__tbody td {
-        padding: 6px 14px 6px 0;
+        padding: 6px 0 6px 0;
     }
 
     .purchase-summary-table__total-thead {

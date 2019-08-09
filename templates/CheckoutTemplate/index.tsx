@@ -10,7 +10,7 @@ interface Props {
 const CheckoutTemplate = ({ isConfirmed = false }: Props): ReactElement => {
     return isConfirmed ? (
         <section className="checkout-template">
-            <h2 className="checkout-template__purchase-confirmation">Sua compra foi concluída com sucesso! :)</h2>
+            <h2 className="checkout-template__purchase-confirmation">Sua compra foi concluída com sucesso!</h2>
             <Button label="Voltar para Página principal" type={Button.types.PRIMARY} />
             <style jsx>{styles}</style>
         </section>

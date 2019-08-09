@@ -8,8 +8,10 @@ import { styles } from './styles';
 const HomePage: NextPage = (): ReactElement => {
     return (
         <div className="home">
-            <ProfileTemplate />
-            <PurchaseTemplate />
+            <div className="home__templates-container">
+                <ProfileTemplate />
+                <PurchaseTemplate />
+            </div>
             <style jsx>{styles}</style>
         </div>
     );
