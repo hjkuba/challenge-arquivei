@@ -2,10 +2,14 @@ import { ReactElement } from 'react';
 import SignupPartial from '../../partials/SignupPartial';
 import { styles } from './styles';
 
-const SignupView = (): ReactElement => {
+interface Props {
+    createCompany: Function;
+}
+
+const SignupView = (props: Props): ReactElement => {
     return (
         <div className="signup-view">
-            <SignupPartial />
+            <SignupPartial createCompany={props.createCompany} />
             <style jsx>{styles}</style>
         </div>
     );

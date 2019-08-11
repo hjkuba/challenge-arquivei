@@ -20,21 +20,6 @@ export const styles = css`
         text-align: center;
     }
 
-    .signup-partial__form {
-        margin-top: 24px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .signup-partial__form > :global(.input) {
-        margin-bottom: 14px;
-    }
-
-    .signup-partial__form > :global(.button) {
-        margin-top: 14px;
-    }
-
     @media (max-width: ${SCREEN_LG_MAX_WIDTH}) {
         .signup-partial {
             width: 50%;

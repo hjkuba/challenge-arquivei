@@ -19,14 +19,48 @@ const CheckoutPartial = (): ReactElement => {
             </div>
             <hr className="checkout-partial__divider" />
             <div className="checkout-partial__credit-card-form">
-                <Input label="CNPJ" type={Input.types.NUMBER} />
-                <Input label="Nome" type={Input.types.NUMBER} />
-                <Input label="Número do Cartão de Crédito" type={Input.types.NUMBER} />
+                <Input
+                    name="cnpj"
+                    onChange={(): void => console.log('change')}
+                    value=""
+                    label="CNPJ"
+                    type={Input.types.NUMBER}
+                />
+                <Input
+                    name="name"
+                    onChange={(): void => console.log('change')}
+                    value=""
+                    label="Nome"
+                    type={Input.types.NUMBER}
+                />
+                <Input
+                    name="credit-card"
+                    onChange={(): void => console.log('change')}
+                    value=""
+                    label="Número do Cartão de Crédito"
+                    type={Input.types.NUMBER}
+                />
                 <div className="checkout-partial__cvv-expiration-container">
-                    <Input label="Data de Expiração" type={Input.types.NUMBER} />
-                    <Input label="CVV" type={Input.types.NUMBER} />
+                    <Input
+                        name="expiration-date"
+                        onChange={(): void => console.log('change')}
+                        value=""
+                        label="Data de Expiração"
+                        type={Input.types.NUMBER}
+                    />
+                    <Input
+                        name="cvv"
+                        value=""
+                        onChange={(): void => console.log('change')}
+                        label="CVV"
+                        type={Input.types.NUMBER}
+                    />
                 </div>
-                <Button label="Confirmar Pagamento" type={Button.types.PRIMARY} />
+                <Button
+                    label="Confirmar Pagamento"
+                    type={Button.types.PRIMARY}
+                    onClick={(): void => console.log('teste')}
+                />
             </div>
             <style jsx>{styles}</style>
         </section>

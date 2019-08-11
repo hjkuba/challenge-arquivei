@@ -1,14 +1,33 @@
-import { NextPage } from 'next';
-import { ReactElement } from 'react';
+import { ReactElement, Component } from 'react';
 import Layout from '../components/Layout';
+import { signinUser } from '../actions/auth-actions';
 import SigninView from '../views/SigninView';
+import { connect } from 'react-redux';
+import { Credentials } from '../types';
 
-const SigninPage: NextPage = (): ReactElement => {
-    return (
-        <Layout>
-            <SigninView />
-        </Layout>
-    );
-};
+interface ActionProps {
+    signinUser: Function;
+}
 
-export default SigninPage;
+class SigninPage extends Component<ActionProps> {
+    public constructor(props: ActionProps) {
+        super(props);
+    }
+
+    private signInUser(credentials: Credentials): void {
+        this.props.signinUser(credentials);
+    }
+
+    public render(): ReactElement {
+        return (
+            <Layout>
+                <SigninView signinUser={this.signInUser.bind(this)} />
+            </Layout>
+        );
+    }
+}
+
+export default connect(
+    null,
+    { signinUser },
+)(SigninPage);

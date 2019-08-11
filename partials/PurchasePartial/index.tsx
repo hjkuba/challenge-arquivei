@@ -12,13 +12,23 @@ const PurchasePartial = (): ReactElement => {
             <div className="purchase-partial__content">
                 <div className="purchase-partial__purchase-section">
                     <div className="purchase-partial__input-container">
-                        <Input type={Input.types.NUMBER} label="Quantas consultas deseja?" />
+                        <Input
+                            name="queries"
+                            onChange={(): void => console.log('change')}
+                            value=""
+                            type={Input.types.NUMBER}
+                            label="Quantas consultas deseja?"
+                        />
                     </div>
                     <hr className="purchase-partial__divider" />
                     <PurchaseSummaryTable />
                     <hr className="purchase-partial__divider" />
                     <div className="purchase-partial__button-container">
-                        <Button label="Comprar" type={Button.types.PRIMARY} />
+                        <Button
+                            onClick={(): void => console.log('teste')}
+                            label="Comprar"
+                            type={Button.types.PRIMARY}
+                        />
                     </div>
                 </div>
                 <div className="purchase-partial__offer-section">

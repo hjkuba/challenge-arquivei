@@ -2,10 +2,14 @@ import { ReactElement } from 'react';
 import SigninPartial from '../../partials/SigninPartial';
 import { styles } from './styles';
 
-const SigninView = (): ReactElement => {
+interface Props {
+    signinUser: Function;
+}
+
+const SigninView = (props: Props): ReactElement => {
     return (
         <div className="signin-view">
-            <SigninPartial />
+            <SigninPartial signinUser={props.signinUser} />
             <style jsx>{styles}</style>
         </div>
     );

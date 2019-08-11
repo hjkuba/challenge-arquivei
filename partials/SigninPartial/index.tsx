@@ -1,17 +1,16 @@
 import { ReactElement } from 'react';
-import Input from '../../components/Input';
 import { styles } from './styles';
-import Button from '../../components/Button';
+import SigninForm from '../SigninForm';
 
-const SigninPartial = (): ReactElement => {
+interface Props {
+    signinUser: Function;
+}
+
+const SigninPartial = (props: Props): ReactElement => {
     return (
         <section className="signin-partial">
             <h2 className="signin-partial__title">Login</h2>
-            <div className="signin-partial__form">
-                <Input label="E-mail" type={Input.types.NUMBER} />
-                <Input label="Senha" type={Input.types.NUMBER} />
-                <Button label="Entrar" type={Button.types.PRIMARY} />
-            </div>
+            <SigninForm onSubmit={props.signinUser} />
             <style jsx>{styles}</style>
         </section>
     );
