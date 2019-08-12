@@ -18,3 +18,9 @@ export interface Promotion {
     ['promotional-texts']: Record<string, string>;
     ['promotional-values']: Record<number, number>;
 }
+
+export interface QueryPricing {
+    quantity: number;
+    unitPrice: number;
+    totalPrice: number;
+}
