@@ -1,17 +1,31 @@
 import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import firebase from '../services/firebase';
-import { Promotion } from '../types';
+import { Promotion, Company } from '../types';
+import { generateQueryPriceMap, toNumber, calculateTotalPrice } from '../helpers/purchase-price';
 
 export enum PurchaseActionTypes {
     QUERY_QTD_CHANGE = 'QUERY_QTD_CHANGE',
     PROMOTION_FETCH = 'PROMOTION_FETCH',
 }
 
-export const changeQueryInput = (inputValue: string | number): AnyAction => {
+export const changeQueryInput = (inputValue: string | number, company: Company, promotion: Promotion): AnyAction => {
+    const queryPriceMap = generateQueryPriceMap(
+        toNumber(inputValue),
+        company.totalQueries,
+        promotion['promotional-values'],
+        promotion['default-value'],
+    );
+
+    const totalValue = calculateTotalPrice(queryPriceMap);
+
     return {
         type: PurchaseActionTypes.QUERY_QTD_CHANGE,
-        payload: inputValue,
+        payload: {
+            inputValue,
+            queryPriceMap,
+            totalValue,
+        },
     };
 };
 
