@@ -4,16 +4,19 @@ import HighlightBox from '../../components/HighlightBox';
 import PurchaseSummaryTable from '../../components/PurchaseSummaryTable';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import { Promotion } from '../../types';
+import { QueryPricing } from '../../types';
 
 interface Props {
     onQueryQtdChange: Function;
-    currentQueryQtd: number | string;
-    totalQueriesBougth: number;
-    promotion: Promotion;
+    onPurchase: Function;
+    currentQueries: number | string;
+    totalPrice: number;
+    queryPriceMap: QueryPricing[];
 }
 
 const PurchasePartial = (props: Props): ReactElement => {
+    const { onQueryQtdChange, onPurchase, currentQueries, totalPrice, queryPriceMap } = props;
+
     return (
         <section className="purchase-partial">
             <h2 className="purchase-partial__title">Adquira mais Consultas</h2>
@@ -22,26 +25,21 @@ const PurchasePartial = (props: Props): ReactElement => {
                     <div className="purchase-partial__input-container">
                         <Input
                             name="queries"
-                            onChange={props.onQueryQtdChange}
-                            value={props.currentQueryQtd}
+                            onChange={onQueryQtdChange}
+                            value={currentQueries}
                             type={Input.types.NUMBER}
                             label="Quantas consultas deseja?"
                         />
                     </div>
                     <hr className="purchase-partial__divider" />
                     <PurchaseSummaryTable
-                        currentQueryQtd={props.currentQueryQtd}
-                        totalQueriesBougth={props.totalQueriesBougth}
-                        promotionMap={props.promotion['promotional-values']}
-                        defaultValue={props.promotion['default-value']}
+                        currentQueries={currentQueries}
+                        totalPrice={totalPrice}
+                        queryPriceMap={queryPriceMap}
                     />
                     <hr className="purchase-partial__divider" />
                     <div className="purchase-partial__button-container">
-                        <Button
-                            onClick={(): void => console.log('teste')}
-                            label="Comprar"
-                            type={Button.types.PRIMARY}
-                        />
+                        <Button onClick={onPurchase} label="Comprar" type={Button.types.PRIMARY} />
                     </div>
                 </div>
                 <div className="purchase-partial__offer-section">

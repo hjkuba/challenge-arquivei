@@ -3,10 +3,11 @@ import Layout from '../components/Layout';
 import HomeView from '../views/HomeView';
 import Loader from '../components/Loader';
 import { connect } from 'react-redux';
-import { Company, Promotion } from '../types';
+import { Company, Promotion, QueryPricing } from '../types';
 import { checkAuth, signOut } from '../actions/auth-actions';
 import { changeQueryInput, fetchPromotion } from '../actions/purchase-actions';
 import { StoreState } from '../reducers';
+import Router from 'next/router';
 
 interface ActionProps {
     checkAuth: Function;
@@ -18,8 +19,10 @@ interface ActionProps {
 interface StateProps {
     company: Company | null;
     isLogged: boolean;
-    currentQueryQtd: number | string;
+    currentQueries: number | string;
     promotion: Promotion;
+    totalPrice: number;
+    queryPriceMap: QueryPricing[];
 }
 
 class HomePage extends Component<ActionProps & StateProps> {
@@ -32,7 +35,11 @@ class HomePage extends Component<ActionProps & StateProps> {
     }
 
     private handleQueryInput(event: ChangeEvent<HTMLInputElement>): void {
-        this.props.changeQueryInput(event.target.value);
+        this.props.changeQueryInput(event.target.value, this.props.company, this.props.promotion);
+    }
+
+    private handlePurchaseAction(): void {
+        Router.push('/checkout');
     }
 
     public componentDidMount(): void {
@@ -43,13 +50,15 @@ class HomePage extends Component<ActionProps & StateProps> {
     public render(): ReactElement {
         return (
             <Layout>
-                {this.props.isLogged && this.props.company ? (
+                {this.props.isLogged && this.props.company && this.props.promotion ? (
                     <HomeView
                         onSignout={this.signOut.bind(this)}
+                        onPurchase={this.handlePurchaseAction.bind(this)}
                         onQueryQtdChange={this.handleQueryInput.bind(this)}
-                        currentQueryQtd={this.props.currentQueryQtd}
+                        currentQueries={this.props.currentQueries}
                         company={this.props.company}
-                        promotion={this.props.promotion}
+                        totalPrice={this.props.totalPrice}
+                        queryPriceMap={this.props.queryPriceMap}
                     />
                 ) : (
                     <Loader />
@@ -63,8 +72,10 @@ const mapStateToProps = ({ user, auth, purchase }: StoreState): StateProps => {
     return {
         company: user.company,
         isLogged: auth.isLogged,
-        currentQueryQtd: purchase.currentInputQtd,
+        currentQueries: purchase.currentInputQtd,
         promotion: purchase.promotion,
+        totalPrice: purchase.totalValue,
+        queryPriceMap: purchase.queryPriceMap,
     };
 };
 

@@ -8,15 +8,21 @@ const exampleInitialState: StoreState = {
     },
     auth: {
         isLogged: false,
+        uid: null,
     },
     purchase: {
         currentInputQtd: 0,
+        totalValue: 0,
+        queryPriceMap: [],
         promotion: {
             'default-text': '',
             'default-value': 0,
             'promotional-texts': {},
             'promotional-values': {},
         },
+    },
+    checkout: {
+        activeConfirmationView: false,
     },
 };
 

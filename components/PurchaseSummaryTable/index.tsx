@@ -1,23 +1,16 @@
 import { ReactElement } from 'react';
 import { styles } from './styles';
 import { QueryPricing } from '../../types';
-import { generateQueryPriceMap, toNumber, calculateTotalPrice, toBRL } from '../../helpers/purchase-price';
+import { toBRL } from '../../helpers/purchase-price';
 
 interface Props {
-    currentQueryQtd: number | string;
-    totalQueriesBougth: number;
-    promotionMap: Record<number, number>;
-    defaultValue: number;
+    currentQueries: number | string;
+    totalPrice: number;
+    queryPriceMap: QueryPricing[];
 }
 
 const PurchaseSummaryTable = (props: Props): ReactElement => {
-    const { currentQueryQtd, totalQueriesBougth, promotionMap, defaultValue } = props;
-    const queryPriceMap = generateQueryPriceMap(
-        toNumber(currentQueryQtd),
-        totalQueriesBougth,
-        promotionMap,
-        defaultValue,
-    );
+    const { currentQueries, totalPrice, queryPriceMap } = props;
 
     const renderQueryPriceList = (queryPriceMap: QueryPricing[]): ReactElement[] => {
         return queryPriceMap.map(
@@ -55,8 +48,8 @@ const PurchaseSummaryTable = (props: Props): ReactElement => {
                 </thead>
                 <tbody className="purchase-summary-table__total-tbody">
                     <tr>
-                        <td>{props.currentQueryQtd}</td>
-                        <td>{toBRL(calculateTotalPrice(queryPriceMap))}</td>
+                        <td>{currentQueries}</td>
+                        <td>{toBRL(totalPrice)}</td>
                     </tr>
                 </tbody>
             </table>
