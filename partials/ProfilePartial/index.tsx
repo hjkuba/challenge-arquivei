@@ -7,6 +7,7 @@ import { Company } from '../../types';
 
 interface Props {
     company: Company;
+    onSignout: Function;
 }
 
 const ProfilePartial = (props: Props): ReactElement => {
@@ -24,7 +25,7 @@ const ProfilePartial = (props: Props): ReactElement => {
                 <p className="profile-partial__query-label">Consultas</p>
             </HighlightBox>
             <div className="profile-partial__logout">
-                <Button label="Sair" type={Button.types.PRIMARY_ALT} onClick={(): void => console.log('teste')} />
+                <Button label="Sair" type={Button.types.PRIMARY_ALT} onClick={props.onSignout} />
             </div>
             <style jsx>{styles}</style>
         </section>

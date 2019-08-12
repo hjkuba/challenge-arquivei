@@ -2,7 +2,7 @@ import { ReactElement, Component } from 'react';
 import Layout from '../components/Layout';
 import SignupView from '../views/SignupView';
 import { connect } from 'react-redux';
-import { createCompany } from '../actions/auth-actions';
+import { createCompany } from '../actions/user-actions';
 import { Company, Credentials } from '../types';
 
 interface ActionProps {

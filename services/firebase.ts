@@ -1,7 +1,7 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import { Company, Credentials } from '../types';
+import { Company, Credentials, Promotion } from '../types';
 
 const config = {
     apiKey: 'AIzaSyBTv-eWrygfDX5qIqZWSRQygGR5Vpm7JsY',
@@ -24,20 +24,28 @@ class FirebaseService {
         this.firebaseDatabase = firebaseApp.firestore();
     }
 
-    public get currentUser(): firebase.User | null {
-        return this.firebaseAuth.currentUser;
+    public async checkAuthentication(): Promise<firebase.User | null> {
+        return new Promise((resolve): void => {
+            this.firebaseAuth.onAuthStateChanged((user): void => {
+                if (user) {
+                    return resolve(user);
+                }
+
+                resolve(null);
+            });
+        });
     }
 
-    private async insertCompanyInfo(userId: string, company: Company): Promise<Company> {
+    public async signinUser(credentials: Credentials): Promise<firebase.auth.UserCredential> {
         try {
-            return await this.firebaseDatabase
-                .collection('users')
-                .doc(userId)
-                .set(company)
-                .then((): Company => company);
+            return await this.firebaseAuth.signInWithEmailAndPassword(credentials.email, credentials.password);
         } catch (err) {
             throw err;
         }
+    }
+
+    public async signOut(): Promise<void> {
+        return await this.firebaseAuth.signOut();
     }
 
     public async createCompany(credentials: Credentials, company: Company): Promise<Company> {
@@ -57,9 +65,53 @@ class FirebaseService {
         }
     }
 
-    public async signinUser(credentials: Credentials): Promise<firebase.auth.UserCredential> {
+    public async fetchCompanyInfo(userId: string): Promise<Company> {
         try {
-            return await this.firebaseAuth.signInWithEmailAndPassword(credentials.email, credentials.password);
+            return await this.firebaseDatabase
+                .collection('users')
+                .doc(userId)
+                .get()
+                .then((snapshot): firebase.firestore.DocumentData | undefined => snapshot.data())
+                .then(
+                    (data): Company => {
+                        if (!data) {
+                            throw new Error('Company not found');
+                        }
+
+                        return data as Company;
+                    },
+                );
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    public async fetchPromotion(): Promise<any> {
+        try {
+            return await this.firebaseDatabase
+                .collection('promotions')
+                .doc('first2000')
+                .get()
+                .then((snapshot): firebase.firestore.DocumentData | undefined => snapshot.data())
+                .then((data): any => {
+                    if (!data) {
+                        throw new Error('Promotion not found');
+                    }
+
+                    return data as Promotion;
+                });
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    private async insertCompanyInfo(userId: string, company: Company): Promise<Company> {
+        try {
+            return await this.firebaseDatabase
+                .collection('users')
+                .doc(userId)
+                .set(company)
+                .then((): Company => company);
         } catch (err) {
             throw err;
         }

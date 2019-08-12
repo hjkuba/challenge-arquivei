@@ -4,8 +4,16 @@ import HighlightBox from '../../components/HighlightBox';
 import PurchaseSummaryTable from '../../components/PurchaseSummaryTable';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import { Promotion } from '../../types';
 
-const PurchasePartial = (): ReactElement => {
+interface Props {
+    onQueryQtdChange: Function;
+    currentQueryQtd: number | string;
+    totalQueriesBougth: number;
+    promotion: Promotion;
+}
+
+const PurchasePartial = (props: Props): ReactElement => {
     return (
         <section className="purchase-partial">
             <h2 className="purchase-partial__title">Adquira mais Consultas</h2>
@@ -14,14 +22,19 @@ const PurchasePartial = (): ReactElement => {
                     <div className="purchase-partial__input-container">
                         <Input
                             name="queries"
-                            onChange={(): void => console.log('change')}
-                            value=""
+                            onChange={props.onQueryQtdChange}
+                            value={props.currentQueryQtd}
                             type={Input.types.NUMBER}
                             label="Quantas consultas deseja?"
                         />
                     </div>
                     <hr className="purchase-partial__divider" />
-                    <PurchaseSummaryTable />
+                    <PurchaseSummaryTable
+                        currentQueryQtd={props.currentQueryQtd}
+                        totalQueriesBougth={props.totalQueriesBougth}
+                        promotionMap={props.promotion['promotional-values']}
+                        defaultValue={props.promotion['default-value']}
+                    />
                     <hr className="purchase-partial__divider" />
                     <div className="purchase-partial__button-container">
                         <Button

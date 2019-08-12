@@ -11,3 +11,10 @@ export interface Company {
     currentQueries: number;
     totalQueries: number;
 }
+
+export interface Promotion {
+    ['default-text']: string;
+    ['default-value']: number;
+    ['promotional-texts']: Record<string, string>;
+    ['promotional-values']: Record<number, number>;
+}

@@ -1,6 +1,7 @@
 import { AnyAction } from 'redux';
 import { Company } from '../types';
-import { ActionTypes } from '../actions/action-types';
+import { UserActionTypes } from '../actions/user-actions';
+import { AuthActionTypes } from '../actions/auth-actions';
 
 export interface UserState {
     company: Company | null;
@@ -12,8 +13,10 @@ const initialState: UserState = {
 
 export default function(state = initialState, action: AnyAction): UserState {
     switch (action.type) {
-        case ActionTypes.USER_CREATED:
-            return action.payload;
+        case UserActionTypes.COMPANY_FETCH:
+            return { ...state, company: action.payload };
+        case AuthActionTypes.SIGN_OUT:
+            return { ...state, company: null };
         default:
             return state;
     }
