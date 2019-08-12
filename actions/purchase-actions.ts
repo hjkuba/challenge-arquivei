@@ -7,6 +7,7 @@ import { generateQueryPriceMap, toNumber, calculateTotalPrice } from '../helpers
 export enum PurchaseActionTypes {
     QUERY_QTD_CHANGE = 'QUERY_QTD_CHANGE',
     PROMOTION_FETCH = 'PROMOTION_FETCH',
+    QUERIES_PURCHASED = 'QUERIES_PURCHASED',
 }
 
 export const changeQueryInput = (inputValue: string | number, company: Company, promotion: Promotion): AnyAction => {

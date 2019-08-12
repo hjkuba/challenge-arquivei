@@ -5,21 +5,23 @@ import { styles } from './styles';
 import { Company, QueryPricing } from '../../types';
 
 interface Props {
-    company: Company;
     onSignout: Function;
     onQueryQtdChange: Function;
+    onPurchase: Function;
+    company: Company;
     currentQueries: number | string;
     totalPrice: number;
     queryPriceMap: QueryPricing[];
 }
 
 const HomeView = (props: Props): ReactElement => {
-    const { company, onSignout, onQueryQtdChange, currentQueries, totalPrice, queryPriceMap } = props;
+    const { onPurchase, company, onSignout, onQueryQtdChange, currentQueries, totalPrice, queryPriceMap } = props;
     return (
         <div className="home-view">
             <div className="home-view__sections">
                 <ProfilePartial onSignout={onSignout} company={company} />
                 <PurchasePartial
+                    onPurchase={onPurchase}
                     onQueryQtdChange={onQueryQtdChange}
                     currentQueries={currentQueries}
                     totalPrice={totalPrice}

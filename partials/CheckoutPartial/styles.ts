@@ -49,35 +49,6 @@ export const styles = css`
         border-color: ${COLOR_GREY_100};
     }
 
-    .checkout-partial__credit-card-form {
-        margin-top: 24px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .checkout-partial__credit-card-form > :global(.input) {
-        margin-bottom: 14px;
-    }
-
-    .checkout-partial__credit-card-form > :global(.button) {
-        margin-top: 14px;
-    }
-
-    .checkout-partial__cvv-expiration-container {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 14px;
-    }
-
-    .checkout-partial__cvv-expiration-container > :global(.input) {
-        flex: 1;
-    }
-
-    .checkout-partial__cvv-expiration-container > :global(.input:first-child) {
-        margin-right: 10px;
-    }
-
     @media (max-width: ${SCREEN_LG_MAX_WIDTH}) {
         .checkout-partial {
             width: 50%;

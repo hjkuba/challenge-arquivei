@@ -7,6 +7,7 @@ import { Company, Promotion, QueryPricing } from '../types';
 import { checkAuth, signOut } from '../actions/auth-actions';
 import { changeQueryInput, fetchPromotion } from '../actions/purchase-actions';
 import { StoreState } from '../reducers';
+import Router from 'next/router';
 
 interface ActionProps {
     checkAuth: Function;
@@ -37,6 +38,10 @@ class HomePage extends Component<ActionProps & StateProps> {
         this.props.changeQueryInput(event.target.value, this.props.company, this.props.promotion);
     }
 
+    private handlePurchaseAction(): void {
+        Router.push('/checkout');
+    }
+
     public componentDidMount(): void {
         this.props.checkAuth();
         this.props.fetchPromotion();
@@ -48,6 +53,7 @@ class HomePage extends Component<ActionProps & StateProps> {
                 {this.props.isLogged && this.props.company && this.props.promotion ? (
                     <HomeView
                         onSignout={this.signOut.bind(this)}
+                        onPurchase={this.handlePurchaseAction.bind(this)}
                         onQueryQtdChange={this.handleQueryInput.bind(this)}
                         currentQueries={this.props.currentQueries}
                         company={this.props.company}

@@ -14,6 +14,7 @@ enum InputType {
     TEXT = 'text',
     EMAIL = 'email',
     PASSWORD = 'password',
+    DATE = 'date',
 }
 
 const Input = ({ label, type, onChange, value, name }: Props): ReactElement => {

@@ -29,7 +29,10 @@ export const checkAuth = (): ThunkAction<unknown, {}, {}, AnyAction> => {
             if (user) {
                 dispatch({
                     type: AuthActionTypes.IS_LOGGED,
-                    payload: true,
+                    payload: {
+                        uid: user.uid,
+                        isLogged: true,
+                    },
                 });
                 dispatch(fetchCompanyInfo(user.uid));
                 return;

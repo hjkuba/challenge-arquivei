@@ -86,7 +86,7 @@ class FirebaseService {
         }
     }
 
-    public async fetchPromotion(): Promise<any> {
+    public async fetchPromotion(): Promise<Promotion> {
         try {
             return await this.firebaseDatabase
                 .collection('promotions')
@@ -99,6 +99,20 @@ class FirebaseService {
                     }
 
                     return data as Promotion;
+                });
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    public async insertQueries(uid: string, queries: number): Promise<void> {
+        try {
+            await this.firebaseDatabase
+                .collection('users')
+                .doc(uid)
+                .update({
+                    totalQueries: firebase.firestore.FieldValue.increment(queries),
+                    currentQueries: firebase.firestore.FieldValue.increment(queries),
                 });
         } catch (err) {
             throw err;
