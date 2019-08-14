@@ -1,4 +1,3 @@
-export const FONT_FAMILY = 'Roboto';
 export const SIZE_HERO = '2.625rem';
 export const SIZE_TITLE = '1.375rem';
 export const SIZE_BODY = '1.125rem';
