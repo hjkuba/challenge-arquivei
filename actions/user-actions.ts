@@ -6,12 +6,20 @@ import { AnyAction } from 'redux';
 
 export enum UserActionTypes {
     COMPANY_FETCH = 'COMPANY_FETCH',
+    ON_USER_CREATE_REQUEST = 'ON_USER_CREATE_REQUEST',
+    ON_USER_CREATE_SUCCEED = 'ON_USER_CREATE_SUCCEED',
 }
 
 export const createCompany = (credentials: Credentials, company: Company): ThunkAction<unknown, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
+        dispatch({
+            type: UserActionTypes.ON_USER_CREATE_REQUEST,
+        });
         try {
             await firebase.createCompany(credentials, company);
+            dispatch({
+                type: UserActionTypes.ON_USER_CREATE_SUCCEED,
+            });
             dispatch((): Promise<boolean> => Router.push('/'));
         } catch (err) {
             throw err;

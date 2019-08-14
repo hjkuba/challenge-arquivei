@@ -4,13 +4,18 @@ import SignupView from '../views/SignupView';
 import { connect } from 'react-redux';
 import { createCompany } from '../actions/user-actions';
 import { Company, Credentials } from '../types';
+import { StoreState } from '../reducers';
 
 interface ActionProps {
     createCompany: Function;
 }
 
-class SignupPage extends Component<ActionProps> {
-    public constructor(props: ActionProps) {
+interface StateProps {
+    isWaitingUserCreation: boolean;
+}
+
+class SignupPage extends Component<ActionProps & StateProps> {
+    public constructor(props: ActionProps & StateProps) {
         super(props);
     }
 
@@ -21,13 +26,23 @@ class SignupPage extends Component<ActionProps> {
     public render(): ReactElement {
         return (
             <Layout>
-                <SignupView createCompany={this.createCompany.bind(this)} />
+                <SignupView
+                    isWaitingUserCreation={this.props.isWaitingUserCreation}
+                    createCompany={this.createCompany.bind(this)}
+                />
             </Layout>
         );
     }
 }
 
+const mapStateToProps = ({ user }: StoreState): StateProps => {
+    const { isWaitingUserCreation } = user;
+    return {
+        isWaitingUserCreation,
+    };
+};
+
 export default connect(
-    null,
+    mapStateToProps,
     { createCompany },
 )(SignupPage);

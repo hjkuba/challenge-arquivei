@@ -3,9 +3,11 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { styles } from './styles';
 import { Credentials, Company } from '../../types';
+import Loader from '../../components/Loader';
 
 interface Props {
     onSubmit: Function;
+    isLoading: boolean;
 }
 
 const SignupForm = (props: Props): ReactElement => {
@@ -65,7 +67,11 @@ const SignupForm = (props: Props): ReactElement => {
                 label="Senha"
                 type={Input.types.PASSWORD}
             />
-            <Button onClick={handleSubmit} label="Cadastrar" type={Button.types.PRIMARY} />
+            {props.isLoading ? (
+                <Loader size={Loader.sizes.SMALL} />
+            ) : (
+                <Button onClick={handleSubmit} label="Cadastrar" type={Button.types.PRIMARY} />
+            )}
             <style jsx>{styles}</style>
         </div>
     );

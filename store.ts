@@ -5,6 +5,7 @@ import reducers, { StoreState } from './reducers';
 const exampleInitialState: StoreState = {
     user: {
         company: null,
+        isWaitingUserCreation: false,
     },
     auth: {
         isLogged: false,
