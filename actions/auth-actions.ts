@@ -8,12 +8,20 @@ import { fetchCompanyInfo } from './user-actions';
 export enum AuthActionTypes {
     IS_LOGGED = 'IS_LOGGED',
     SIGN_OUT = 'SIGN_OUT',
+    ON_LOGIN_REQUEST = 'ON_LOGIN_REQUEST',
+    ON_LOGIN_SUCCEED = 'ON_LOGIN_SUCCEED',
 }
 
 export const signinUser = (credentials: Credentials): ThunkAction<unknown, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
+        dispatch({
+            type: AuthActionTypes.ON_LOGIN_REQUEST,
+        });
         try {
             await firebase.signinUser(credentials);
+            dispatch({
+                type: AuthActionTypes.ON_LOGIN_SUCCEED,
+            });
             dispatch((): Promise<boolean> => Router.push('/'));
         } catch (err) {
             throw err;

@@ -8,6 +8,7 @@ const exampleInitialState: StoreState = {
     },
     auth: {
         isLogged: false,
+        isWaitingSignin: false,
         uid: null,
     },
     purchase: {
