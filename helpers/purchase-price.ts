@@ -4,8 +4,8 @@ export const toBRL = (value: number): string => {
     return `R$${value.toFixed(2).replace('.', ',')}`;
 };
 
-export const toNumber = (value: string | number): number => {
-    const number = typeof value === 'string' ? parseInt(value) : value;
+export const toNumber = (value: string): number => {
+    const number = parseInt(value);
     return Number.isNaN(number) ? 0 : number;
 };
 

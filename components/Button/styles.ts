@@ -1,5 +1,5 @@
 import css from 'styled-jsx/css';
-import { COLOR_PRIMARY } from '../../constants/colors';
+import { COLOR_PRIMARY, COLOR_GREY_100 } from '../../constants/colors';
 import { SIZE_CTA } from '../../constants/typography';
 
 const primaryStyles = `
@@ -43,5 +43,10 @@ export const styles = css`
 
     .button--primary-alt:active {
         ${primaryStyles}
+    }
+
+    .button--disabled {
+        background-color: ${COLOR_GREY_100};
+        color: white;
     }
 `;

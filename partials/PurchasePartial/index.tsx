@@ -9,14 +9,13 @@ import { QueryPricing } from '../../types';
 interface Props {
     onQueryQtdChange: Function;
     onPurchase: Function;
-    currentQueries: number | string;
+    currentQueries: number;
     totalPrice: number;
     queryPriceMap: QueryPricing[];
 }
 
 const PurchasePartial = (props: Props): ReactElement => {
     const { onQueryQtdChange, onPurchase, currentQueries, totalPrice, queryPriceMap } = props;
-
     return (
         <section className="purchase-partial">
             <h2 className="purchase-partial__title">Adquira mais Consultas</h2>
@@ -26,7 +25,6 @@ const PurchasePartial = (props: Props): ReactElement => {
                         <Input
                             name="queries"
                             onChange={onQueryQtdChange}
-                            value={currentQueries}
                             type={Input.types.NUMBER}
                             label="Quantas consultas deseja?"
                         />
@@ -39,7 +37,12 @@ const PurchasePartial = (props: Props): ReactElement => {
                     />
                     <hr className="purchase-partial__divider" />
                     <div className="purchase-partial__button-container">
-                        <Button onClick={onPurchase} label="Comprar" type={Button.types.PRIMARY} />
+                        <Button
+                            disabled={currentQueries ? false : true}
+                            onClick={onPurchase}
+                            label="Comprar"
+                            type={Button.types.PRIMARY}
+                        />
                     </div>
                 </div>
                 <div className="purchase-partial__offer-section">

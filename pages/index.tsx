@@ -19,7 +19,7 @@ interface ActionProps {
 interface StateProps {
     company: Company | null;
     isLogged: boolean;
-    currentQueries: number | string;
+    currentQueries: number;
     promotion: Promotion;
     totalPrice: number;
     queryPriceMap: QueryPricing[];

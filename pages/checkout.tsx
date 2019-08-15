@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { StoreState } from '../reducers';
 import { checkAuth } from '../actions/auth-actions';
 import Loader from '../components/Loader';
-import { toNumber } from '../helpers/purchase-price';
 import Router from 'next/router';
 import { buyQueries, backToDashboard } from '../actions/checkout-actions';
 
@@ -67,7 +66,7 @@ const mapStateToProps = ({ auth, purchase, checkout }: StoreState): StateProps =
         isLogged: auth.isLogged,
         uid: auth.uid,
         totalValue: purchase.totalValue,
-        queryQuantity: toNumber(purchase.currentInputQtd),
+        queryQuantity: purchase.currentInputQtd,
         checkoutConfirmation: checkout.activeConfirmationView,
     };
 };

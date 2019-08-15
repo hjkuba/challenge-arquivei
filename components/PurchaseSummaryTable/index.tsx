@@ -4,7 +4,7 @@ import { QueryPricing } from '../../types';
 import { toBRL } from '../../helpers/purchase-price';
 
 interface Props {
-    currentQueries: number | string;
+    currentQueries: number;
     totalPrice: number;
     queryPriceMap: QueryPricing[];
 }
