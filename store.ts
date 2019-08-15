@@ -11,6 +11,7 @@ const exampleInitialState: StoreState = {
     auth: {
         isLogged: false,
         isWaitingSignin: false,
+        signinErrorMsg: '',
         uid: null,
     },
     purchase: {

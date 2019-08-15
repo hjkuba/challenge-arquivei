@@ -3,10 +3,12 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { styles } from './styles';
 import Loader from '../../components/Loader';
+import Alert from '../../components/Alert';
 
 interface Props {
     onSubmit: Function;
     isLoading?: boolean;
+    errorMsg: string;
 }
 
 const SigninForm = (props: Props): ReactElement => {
@@ -26,6 +28,7 @@ const SigninForm = (props: Props): ReactElement => {
 
     return (
         <div className="signin-form">
+            {props.errorMsg ? <Alert type={Alert.types.ERROR}>{props.errorMsg}</Alert> : null}
             <Input
                 name="email"
                 onChange={handleChange}

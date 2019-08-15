@@ -12,6 +12,7 @@ interface ActionProps {
 
 interface StateProps {
     isWaitingSignin: boolean;
+    signinErrorMsg: string;
 }
 
 class SigninPage extends Component<ActionProps & StateProps> {
@@ -26,16 +27,21 @@ class SigninPage extends Component<ActionProps & StateProps> {
     public render(): ReactElement {
         return (
             <Layout>
-                <SigninView isWaitingSignin={this.props.isWaitingSignin} signinUser={this.signInUser.bind(this)} />
+                <SigninView
+                    signinErrorMsg={this.props.signinErrorMsg}
+                    isWaitingSignin={this.props.isWaitingSignin}
+                    signinUser={this.signInUser.bind(this)}
+                />
             </Layout>
         );
     }
 }
 
 const mapStateToProps = ({ auth }: StoreState): StateProps => {
-    const { isWaitingSignin } = auth;
+    const { isWaitingSignin, signinErrorMsg } = auth;
     return {
         isWaitingSignin,
+        signinErrorMsg,
     };
 };
 

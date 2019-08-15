@@ -3,6 +3,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { styles } from './styles';
 import Loader from '../../components/Loader';
+import Alert from '../../components/Alert';
 
 interface Props {
     onSubmit: Function;
@@ -30,6 +31,7 @@ const CheckoutForm = (props: Props): ReactElement => {
 
     return (
         <div className="checkout-form">
+            <Alert type={Alert.types.ERROR}>Mensagem de erro</Alert>
             <Input name="cnpj" onChange={handleChange} value={form.cnpj} label="CNPJ" type={Input.types.TEXT} />
             <Input name="name" onChange={handleChange} value={form.name} label="Nome" type={Input.types.TEXT} />
             <Input

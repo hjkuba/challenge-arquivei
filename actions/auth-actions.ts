@@ -10,6 +10,7 @@ export enum AuthActionTypes {
     SIGN_OUT = 'SIGN_OUT',
     ON_LOGIN_REQUEST = 'ON_LOGIN_REQUEST',
     ON_LOGIN_SUCCEED = 'ON_LOGIN_SUCCEED',
+    ON_LOGIN_ERROR = 'ON_LOGIN_ERROR',
 }
 
 export const signinUser = (credentials: Credentials): ThunkAction<unknown, {}, {}, AnyAction> => {
@@ -24,7 +25,10 @@ export const signinUser = (credentials: Credentials): ThunkAction<unknown, {}, {
             });
             dispatch((): Promise<boolean> => Router.push('/'));
         } catch (err) {
-            throw err;
+            dispatch({
+                type: AuthActionTypes.ON_LOGIN_ERROR,
+                payload: err.message,
+            });
         }
     };
 };
