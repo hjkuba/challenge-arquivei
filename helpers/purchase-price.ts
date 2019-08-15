@@ -43,6 +43,13 @@ export const generateQueryPriceMap = (
 
         if (previousQueries + currentQueries > currentLimit) {
             const queriesAux = currentLimit - previousQueries;
+
+            if (queriesAux < 0) {
+                previousQueries = previousQueries - currentLimit;
+                previousLimit = currentLimit;
+                return;
+            }
+
             currentQueries -= queriesAux;
             previousQueries = 0;
             queryPrice.quantity = queriesAux;
