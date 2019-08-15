@@ -12,6 +12,7 @@ interface ActionProps {
 
 interface StateProps {
     isWaitingUserCreation: boolean;
+    signupErrorMsg: string;
 }
 
 class SignupPage extends Component<ActionProps & StateProps> {
@@ -27,6 +28,7 @@ class SignupPage extends Component<ActionProps & StateProps> {
         return (
             <Layout>
                 <SignupView
+                    signupErrorMsg={this.props.signupErrorMsg}
                     isWaitingUserCreation={this.props.isWaitingUserCreation}
                     createCompany={this.createCompany.bind(this)}
                 />
@@ -36,9 +38,10 @@ class SignupPage extends Component<ActionProps & StateProps> {
 }
 
 const mapStateToProps = ({ user }: StoreState): StateProps => {
-    const { isWaitingUserCreation } = user;
+    const { isWaitingUserCreation, signupErrorMsg } = user;
     return {
         isWaitingUserCreation,
+        signupErrorMsg,
     };
 };
 

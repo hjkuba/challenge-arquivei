@@ -8,6 +8,7 @@ export enum UserActionTypes {
     COMPANY_FETCH = 'COMPANY_FETCH',
     ON_USER_CREATE_REQUEST = 'ON_USER_CREATE_REQUEST',
     ON_USER_CREATE_SUCCEED = 'ON_USER_CREATE_SUCCEED',
+    ON_USER_CREATE_FAIL = 'ON_USER_CREATE_FAIL',
 }
 
 export const createCompany = (credentials: Credentials, company: Company): ThunkAction<unknown, {}, {}, AnyAction> => {
@@ -22,7 +23,10 @@ export const createCompany = (credentials: Credentials, company: Company): Thunk
             });
             dispatch((): Promise<boolean> => Router.push('/'));
         } catch (err) {
-            throw err;
+            dispatch({
+                type: UserActionTypes.ON_USER_CREATE_FAIL,
+                payload: err.message,
+            });
         }
     };
 };

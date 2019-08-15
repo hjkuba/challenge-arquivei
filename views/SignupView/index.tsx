@@ -5,12 +5,17 @@ import { styles } from './styles';
 interface Props {
     createCompany: Function;
     isWaitingUserCreation: boolean;
+    signupErrorMsg: string;
 }
 
 const SignupView = (props: Props): ReactElement => {
     return (
         <div className="signup-view">
-            <SignupPartial isWaitingUserCreation={props.isWaitingUserCreation} createCompany={props.createCompany} />
+            <SignupPartial
+                signupErrorMsg={props.signupErrorMsg}
+                isWaitingUserCreation={props.isWaitingUserCreation}
+                createCompany={props.createCompany}
+            />
             <style jsx>{styles}</style>
         </div>
     );

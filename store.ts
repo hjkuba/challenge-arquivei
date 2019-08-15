@@ -6,6 +6,7 @@ const exampleInitialState: StoreState = {
     user: {
         company: null,
         isWaitingUserCreation: false,
+        signupErrorMsg: '',
     },
     auth: {
         isLogged: false,
