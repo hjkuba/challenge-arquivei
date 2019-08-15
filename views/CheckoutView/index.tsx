@@ -9,6 +9,7 @@ interface Props {
     isConfirmed: boolean;
     totalValue: number;
     queryQuantity: number;
+    isWaitingPayment: boolean;
 }
 
 const CheckoutView = (props: Props): ReactElement => {
@@ -21,6 +22,7 @@ const CheckoutView = (props: Props): ReactElement => {
                     onPaymentConfirmation={props.onPaymentConfirmation}
                     totalValue={props.totalValue}
                     queryQuantity={props.queryQuantity}
+                    isWaitingPayment={props.isWaitingPayment}
                 />
             )}
             <style jsx>{styles}</style>

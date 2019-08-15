@@ -26,6 +26,8 @@ export default function(state = initialState, action: AnyAction): PurchaseState 
         case PurchaseActionTypes.QUERY_QTD_CHANGE:
             const { numberValue, queryPriceMap, totalValue } = action.payload;
             return { ...state, currentInputQtd: numberValue, totalValue, queryPriceMap };
+        case PurchaseActionTypes.RESET_QUERIES:
+            return { ...initialState, promotion: state.promotion };
         case PurchaseActionTypes.PROMOTION_FETCH:
             return { ...state, promotion: action.payload };
         default:

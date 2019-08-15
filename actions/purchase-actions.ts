@@ -8,6 +8,7 @@ export enum PurchaseActionTypes {
     QUERY_QTD_CHANGE = 'QUERY_QTD_CHANGE',
     PROMOTION_FETCH = 'PROMOTION_FETCH',
     QUERIES_PURCHASED = 'QUERIES_PURCHASED',
+    RESET_QUERIES = 'RESET_QUERIES',
 }
 
 export const changeQueryInput = (inputValue: string, company: Company, promotion: Promotion): AnyAction => {

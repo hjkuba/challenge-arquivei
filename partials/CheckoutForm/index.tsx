@@ -2,10 +2,12 @@ import { ReactElement, useState, ChangeEvent } from 'react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { styles } from './styles';
+import Loader from '../../components/Loader';
 
 interface Props {
     onSubmit: Function;
     queryQuantity: number;
+    isLoading: boolean;
 }
 
 const CheckoutForm = (props: Props): ReactElement => {
@@ -47,7 +49,11 @@ const CheckoutForm = (props: Props): ReactElement => {
                 />
                 <Input name="cvv" value={form.cvv} onChange={handleChange} label="CVV" type={Input.types.NUMBER} />
             </div>
-            <Button label="Confirmar Pagamento" type={Button.types.PRIMARY} onClick={handleSubmit} />
+            {props.isLoading ? (
+                <Loader size={Loader.sizes.SMALL} />
+            ) : (
+                <Button label="Confirmar Pagamento" type={Button.types.PRIMARY} onClick={handleSubmit} />
+            )}
             <style jsx>{styles}</style>
         </div>
     );

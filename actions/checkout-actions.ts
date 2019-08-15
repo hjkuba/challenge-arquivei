@@ -2,21 +2,28 @@ import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import firebase from '../services/firebase';
 import Router from 'next/router';
+import { PurchaseActionTypes } from './purchase-actions';
 
 export enum CheckoutActionTypes {
-    QUERIES_BOUGHT = 'QUERIES_PURCHASED',
     TO_DASHBOARD = 'TO_DASHBOARD',
+    ON_PAYMENT_REQUEST = 'ON_PAYMENT_REQUEST',
+    ON_PAYMENT_SUCCEED = 'ON_PAYMENT_SUCCEED',
 }
 
 export const buyQueries = (uid: string, queries: number, data: any): ThunkAction<unknown, {}, {}, AnyAction> => {
     console.log('Simulate checkout with form data: ', data);
 
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
+        dispatch({
+            type: CheckoutActionTypes.ON_PAYMENT_REQUEST,
+        });
         try {
             await firebase.insertQueries(uid, queries);
             dispatch({
-                type: CheckoutActionTypes.QUERIES_BOUGHT,
-                payload: true,
+                type: PurchaseActionTypes.RESET_QUERIES,
+            });
+            dispatch({
+                type: CheckoutActionTypes.ON_PAYMENT_SUCCEED,
             });
         } catch (err) {
             throw err;

@@ -20,6 +20,7 @@ interface StateProps {
     totalValue: number;
     queryQuantity: number;
     checkoutConfirmation: boolean;
+    isWaitingPayment: boolean;
 }
 
 class CheckoutPage extends Component<ActionProps & StateProps> {
@@ -52,6 +53,7 @@ class CheckoutPage extends Component<ActionProps & StateProps> {
                         totalValue={this.props.totalValue}
                         queryQuantity={this.props.queryQuantity}
                         isConfirmed={this.props.checkoutConfirmation}
+                        isWaitingPayment={this.props.isWaitingPayment}
                     />
                 ) : (
                     <Loader />
@@ -68,6 +70,7 @@ const mapStateToProps = ({ auth, purchase, checkout }: StoreState): StateProps =
         totalValue: purchase.totalValue,
         queryQuantity: purchase.currentInputQtd,
         checkoutConfirmation: checkout.activeConfirmationView,
+        isWaitingPayment: checkout.isWaitingPayment,
     };
 };
 

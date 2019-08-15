@@ -25,6 +25,7 @@ const exampleInitialState: StoreState = {
     },
     checkout: {
         activeConfirmationView: false,
+        isWaitingPayment: false,
     },
 };
 
