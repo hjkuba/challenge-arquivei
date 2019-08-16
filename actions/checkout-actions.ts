@@ -8,6 +8,7 @@ export enum CheckoutActionTypes {
     TO_DASHBOARD = 'TO_DASHBOARD',
     ON_PAYMENT_REQUEST = 'ON_PAYMENT_REQUEST',
     ON_PAYMENT_SUCCEED = 'ON_PAYMENT_SUCCEED',
+    ON_PAYMENT_ERROR = 'ON_PAYMENT_ERROR',
 }
 
 export const buyQueries = (uid: string, queries: number, data: any): ThunkAction<unknown, {}, {}, AnyAction> => {
@@ -26,7 +27,10 @@ export const buyQueries = (uid: string, queries: number, data: any): ThunkAction
                 type: CheckoutActionTypes.ON_PAYMENT_SUCCEED,
             });
         } catch (err) {
-            throw err;
+            dispatch({
+                type: CheckoutActionTypes.ON_PAYMENT_ERROR,
+                payload: err.message,
+            });
         }
     };
 };

@@ -9,6 +9,7 @@ interface Props {
     onSubmit: Function;
     queryQuantity: number;
     isLoading: boolean;
+    errorMsg: string;
 }
 
 const CheckoutForm = (props: Props): ReactElement => {
@@ -31,7 +32,7 @@ const CheckoutForm = (props: Props): ReactElement => {
 
     return (
         <div className="checkout-form">
-            <Alert type={Alert.types.ERROR}>Mensagem de erro</Alert>
+            {props.errorMsg ? <Alert type={Alert.types.ERROR}>{props.errorMsg}</Alert> : null}
             <Input name="cnpj" onChange={handleChange} value={form.cnpj} label="CNPJ" type={Input.types.TEXT} />
             <Input name="name" onChange={handleChange} value={form.name} label="Nome" type={Input.types.TEXT} />
             <Input

@@ -21,6 +21,7 @@ interface StateProps {
     queryQuantity: number;
     checkoutConfirmation: boolean;
     isWaitingPayment: boolean;
+    checkoutErrorMsg: string;
 }
 
 class CheckoutPage extends Component<ActionProps & StateProps> {
@@ -48,6 +49,7 @@ class CheckoutPage extends Component<ActionProps & StateProps> {
             <Layout>
                 {this.props.isLogged ? (
                     <CheckoutView
+                        checkoutErrorMsg={this.props.checkoutErrorMsg}
                         onPaymentConfirmation={this.handlePaymentConfirmation.bind(this)}
                         onBackToDashboard={this.handleBackToDashBoard.bind(this)}
                         totalValue={this.props.totalValue}
@@ -71,6 +73,7 @@ const mapStateToProps = ({ auth, purchase, checkout }: StoreState): StateProps =
         queryQuantity: purchase.currentInputQtd,
         checkoutConfirmation: checkout.activeConfirmationView,
         isWaitingPayment: checkout.isWaitingPayment,
+        checkoutErrorMsg: checkout.checkoutErrorMsg,
     };
 };
 

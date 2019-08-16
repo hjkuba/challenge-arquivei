@@ -10,6 +10,7 @@ interface Props {
     totalValue: number;
     queryQuantity: number;
     isWaitingPayment: boolean;
+    checkoutErrorMsg: string;
 }
 
 const CheckoutView = (props: Props): ReactElement => {
@@ -23,6 +24,7 @@ const CheckoutView = (props: Props): ReactElement => {
                     totalValue={props.totalValue}
                     queryQuantity={props.queryQuantity}
                     isWaitingPayment={props.isWaitingPayment}
+                    checkoutErrorMsg={props.checkoutErrorMsg}
                 />
             )}
             <style jsx>{styles}</style>

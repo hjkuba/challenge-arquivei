@@ -8,6 +8,7 @@ interface Props {
     totalValue: number;
     queryQuantity: number;
     isWaitingPayment: boolean;
+    checkoutErrorMsg: string;
 }
 
 const CheckoutPartial = (props: Props): ReactElement => {
@@ -26,6 +27,7 @@ const CheckoutPartial = (props: Props): ReactElement => {
             </div>
             <hr className="checkout-partial__divider" />
             <CheckoutForm
+                errorMsg={props.checkoutErrorMsg}
                 queryQuantity={props.queryQuantity}
                 onSubmit={props.onPaymentConfirmation}
                 isLoading={props.isWaitingPayment}
