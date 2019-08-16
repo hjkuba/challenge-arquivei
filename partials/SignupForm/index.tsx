@@ -47,7 +47,14 @@ const SignupForm = (props: Props): ReactElement => {
     return (
         <div className="signup-form">
             {props.errorMsg ? <Alert type={Alert.types.ERROR}>{props.errorMsg}</Alert> : null}
-            <Input name="cnpj" onChange={handleChange} value={form.cnpj} label="CNPJ" type={Input.types.TEXT} />
+            <Input
+                name="cnpj"
+                onChange={handleChange}
+                value={form.cnpj}
+                label="CNPJ"
+                type={Input.types.MASKED}
+                mask={Input.masks.CNPJ}
+            />
             <Input
                 name="tradingName"
                 onChange={handleChange}
