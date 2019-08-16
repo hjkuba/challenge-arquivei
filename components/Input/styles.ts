@@ -1,6 +1,6 @@
 import css from 'styled-jsx/css';
 import { SIZE_CTA } from '../../constants/typography';
-import { COLOR_GREY_100, COLOR_DARK } from '../../constants/colors';
+import { COLOR_GREY_100, COLOR_DARK, COLOR_ERROR } from '../../constants/colors';
 
 export const styles = css`
     .input {
@@ -14,6 +14,12 @@ export const styles = css`
         font-size: ${SIZE_CTA};
         font-weight: bold;
         color: ${COLOR_DARK};
+    }
+
+    .input__warning {
+        font-size: ${SIZE_CTA};
+        color: ${COLOR_ERROR};
+        margin-top: 4px;
     }
 
     .input :global(.input__input-field) {
