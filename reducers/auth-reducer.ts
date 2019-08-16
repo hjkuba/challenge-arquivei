@@ -28,6 +28,8 @@ export default function(state = initialState, action: AnyAction): AuthState {
             return { ...state, isWaitingSignin: false };
         case AuthActionTypes.ON_LOGIN_ERROR:
             return { ...state, isWaitingSignin: false, signinErrorMsg: action.payload };
+        case AuthActionTypes.RESET_SIGNIN_ERRORS:
+            return { ...state, signinErrorMsg: '' };
         default:
             return state;
     }

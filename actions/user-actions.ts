@@ -9,6 +9,7 @@ export enum UserActionTypes {
     ON_USER_CREATE_REQUEST = 'ON_USER_CREATE_REQUEST',
     ON_USER_CREATE_SUCCEED = 'ON_USER_CREATE_SUCCEED',
     ON_USER_CREATE_FAIL = 'ON_USER_CREATE_FAIL',
+    RESET_SIGNUP_ERRORS = 'RESET_SIGNUP_ERRORS',
 }
 
 export const createCompany = (credentials: Credentials, company: Company): ThunkAction<unknown, {}, {}, AnyAction> => {
@@ -42,5 +43,11 @@ export const fetchCompanyInfo = (userId: string): ThunkAction<unknown, {}, {}, A
         } catch (err) {
             throw err;
         }
+    };
+};
+
+export const resetSignupErrors = (): AnyAction => {
+    return {
+        type: UserActionTypes.RESET_SIGNUP_ERRORS,
     };
 };

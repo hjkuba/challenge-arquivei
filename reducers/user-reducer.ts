@@ -25,6 +25,8 @@ export default function(state = initialState, action: AnyAction): UserState {
             return { ...state, isWaitingUserCreation: false };
         case UserActionTypes.ON_USER_CREATE_FAIL:
             return { ...state, signupErrorMsg: action.payload, isWaitingUserCreation: false };
+        case UserActionTypes.RESET_SIGNUP_ERRORS:
+            return { ...state, signupErrorMsg: '' };
         case AuthActionTypes.SIGN_OUT:
             return { ...state, company: null };
         default:

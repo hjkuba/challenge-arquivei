@@ -6,12 +6,13 @@ import { StoreState } from '../reducers';
 import { checkAuth } from '../actions/auth-actions';
 import Loader from '../components/Loader';
 import Router from 'next/router';
-import { buyQueries, backToDashboard } from '../actions/checkout-actions';
+import { buyQueries, backToDashboard, resetCheckoutErrors } from '../actions/checkout-actions';
 
 interface ActionProps {
     checkAuth: Function;
     buyQueries: Function;
     backToDashboard: Function;
+    resetCheckoutErrors: Function;
 }
 
 interface StateProps {
@@ -34,6 +35,10 @@ class CheckoutPage extends Component<ActionProps & StateProps> {
         if (!this.props.queryQuantity) {
             Router.push('/');
         }
+    }
+
+    public componentWillUnmount(): void {
+        this.props.resetCheckoutErrors();
     }
 
     private handlePaymentConfirmation(queryQuantity: number, checkoutForm: any): void {
@@ -79,5 +84,5 @@ const mapStateToProps = ({ auth, purchase, checkout }: StoreState): StateProps =
 
 export default connect(
     mapStateToProps,
-    { checkAuth, buyQueries, backToDashboard },
+    { checkAuth, buyQueries, backToDashboard, resetCheckoutErrors },
 )(CheckoutPage);

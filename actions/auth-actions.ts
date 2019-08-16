@@ -11,6 +11,7 @@ export enum AuthActionTypes {
     ON_LOGIN_REQUEST = 'ON_LOGIN_REQUEST',
     ON_LOGIN_SUCCEED = 'ON_LOGIN_SUCCEED',
     ON_LOGIN_ERROR = 'ON_LOGIN_ERROR',
+    RESET_SIGNIN_ERRORS = 'RESET_SIGNIN_ERRORS',
 }
 
 export const signinUser = (credentials: Credentials): ThunkAction<unknown, {}, {}, AnyAction> => {
@@ -70,5 +71,11 @@ export const signOut = (): ThunkAction<unknown, {}, {}, AnyAction> => {
         } catch (err) {
             throw err;
         }
+    };
+};
+
+export const resetSigninErrors = (): AnyAction => {
+    return {
+        type: AuthActionTypes.RESET_SIGNIN_ERRORS,
     };
 };

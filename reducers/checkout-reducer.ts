@@ -21,6 +21,8 @@ export default function(state = initialState, action: AnyAction): CheckoutState 
             return { ...state, isWaitingPayment: false, activeConfirmationView: true };
         case CheckoutActionTypes.ON_PAYMENT_ERROR:
             return { ...state, isWaitingPayment: false, checkoutErrorMsg: action.payload };
+        case CheckoutActionTypes.RESET_CHECKOUT_ERRORS:
+            return { ...state, checkoutErrorMsg: '' };
         case CheckoutActionTypes.TO_DASHBOARD:
             return { ...state, activeConfirmationView: action.payload };
         default:

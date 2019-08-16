@@ -9,6 +9,7 @@ export enum CheckoutActionTypes {
     ON_PAYMENT_REQUEST = 'ON_PAYMENT_REQUEST',
     ON_PAYMENT_SUCCEED = 'ON_PAYMENT_SUCCEED',
     ON_PAYMENT_ERROR = 'ON_PAYMENT_ERROR',
+    RESET_CHECKOUT_ERRORS = 'RESET_CHECKOUT_ERRORS',
 }
 
 export const buyQueries = (uid: string, queries: number, data: any): ThunkAction<unknown, {}, {}, AnyAction> => {
@@ -43,5 +44,11 @@ export const backToDashboard = (): ThunkAction<unknown, {}, {}, AnyAction> => {
         });
 
         Router.push('/');
+    };
+};
+
+export const resetCheckoutErrors = (): AnyAction => {
+    return {
+        type: CheckoutActionTypes.RESET_CHECKOUT_ERRORS,
     };
 };
