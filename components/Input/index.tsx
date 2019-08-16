@@ -5,7 +5,7 @@ interface Props {
     label?: string;
     type: InputType;
     onChange: Function;
-    value: string | number;
+    value?: string | number;
     name: string;
 }
 

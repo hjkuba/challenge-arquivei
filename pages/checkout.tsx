@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { StoreState } from '../reducers';
 import { checkAuth } from '../actions/auth-actions';
 import Loader from '../components/Loader';
-import { toNumber } from '../helpers/purchase-price';
 import Router from 'next/router';
-import { buyQueries, backToDashboard } from '../actions/checkout-actions';
+import { buyQueries, backToDashboard, resetCheckoutErrors } from '../actions/checkout-actions';
 
 interface ActionProps {
     checkAuth: Function;
     buyQueries: Function;
     backToDashboard: Function;
+    resetCheckoutErrors: Function;
 }
 
 interface StateProps {
@@ -21,6 +21,8 @@ interface StateProps {
     totalValue: number;
     queryQuantity: number;
     checkoutConfirmation: boolean;
+    isWaitingPayment: boolean;
+    checkoutErrorMsg: string;
 }
 
 class CheckoutPage extends Component<ActionProps & StateProps> {
@@ -33,6 +35,10 @@ class CheckoutPage extends Component<ActionProps & StateProps> {
         if (!this.props.queryQuantity) {
             Router.push('/');
         }
+    }
+
+    public componentWillUnmount(): void {
+        this.props.resetCheckoutErrors();
     }
 
     private handlePaymentConfirmation(queryQuantity: number, checkoutForm: any): void {
@@ -48,11 +54,13 @@ class CheckoutPage extends Component<ActionProps & StateProps> {
             <Layout>
                 {this.props.isLogged ? (
                     <CheckoutView
+                        checkoutErrorMsg={this.props.checkoutErrorMsg}
                         onPaymentConfirmation={this.handlePaymentConfirmation.bind(this)}
                         onBackToDashboard={this.handleBackToDashBoard.bind(this)}
                         totalValue={this.props.totalValue}
                         queryQuantity={this.props.queryQuantity}
                         isConfirmed={this.props.checkoutConfirmation}
+                        isWaitingPayment={this.props.isWaitingPayment}
                     />
                 ) : (
                     <Loader />
@@ -67,12 +75,14 @@ const mapStateToProps = ({ auth, purchase, checkout }: StoreState): StateProps =
         isLogged: auth.isLogged,
         uid: auth.uid,
         totalValue: purchase.totalValue,
-        queryQuantity: toNumber(purchase.currentInputQtd),
+        queryQuantity: purchase.currentInputQtd,
         checkoutConfirmation: checkout.activeConfirmationView,
+        isWaitingPayment: checkout.isWaitingPayment,
+        checkoutErrorMsg: checkout.checkoutErrorMsg,
     };
 };
 
 export default connect(
     mapStateToProps,
-    { checkAuth, buyQueries, backToDashboard },
+    { checkAuth, buyQueries, backToDashboard, resetCheckoutErrors },
 )(CheckoutPage);

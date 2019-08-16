@@ -1,11 +1,15 @@
 import { ReactElement, useState, ChangeEvent } from 'react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import Alert from '../../components/Alert';
 import { styles } from './styles';
 import { Credentials, Company } from '../../types';
+import Loader from '../../components/Loader';
 
 interface Props {
     onSubmit: Function;
+    isLoading: boolean;
+    errorMsg: string;
 }
 
 const SignupForm = (props: Props): ReactElement => {
@@ -42,6 +46,7 @@ const SignupForm = (props: Props): ReactElement => {
 
     return (
         <div className="signup-form">
+            {props.errorMsg ? <Alert type={Alert.types.ERROR}>{props.errorMsg}</Alert> : null}
             <Input name="cnpj" onChange={handleChange} value={form.cnpj} label="CNPJ" type={Input.types.TEXT} />
             <Input
                 name="tradingName"
@@ -65,7 +70,11 @@ const SignupForm = (props: Props): ReactElement => {
                 label="Senha"
                 type={Input.types.PASSWORD}
             />
-            <Button onClick={handleSubmit} label="Cadastrar" type={Button.types.PRIMARY} />
+            {props.isLoading ? (
+                <Loader size={Loader.sizes.SMALL} />
+            ) : (
+                <Button onClick={handleSubmit} label="Cadastrar" type={Button.types.PRIMARY} />
+            )}
             <style jsx>{styles}</style>
         </div>
     );

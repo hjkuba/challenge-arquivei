@@ -9,7 +9,7 @@ interface Props {
     onQueryQtdChange: Function;
     onPurchase: Function;
     company: Company;
-    currentQueries: number | string;
+    currentQueries: number;
     totalPrice: number;
     queryPriceMap: QueryPricing[];
 }

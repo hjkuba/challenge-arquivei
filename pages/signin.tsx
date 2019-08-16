@@ -1,17 +1,28 @@
 import { ReactElement, Component } from 'react';
 import Layout from '../components/Layout';
-import { signinUser } from '../actions/auth-actions';
+import { signinUser, resetSigninErrors } from '../actions/auth-actions';
 import SigninView from '../views/SigninView';
 import { connect } from 'react-redux';
 import { Credentials } from '../types';
+import { StoreState } from '../reducers';
 
 interface ActionProps {
     signinUser: Function;
+    resetSigninErrors: Function;
 }
 
-class SigninPage extends Component<ActionProps> {
-    public constructor(props: ActionProps) {
+interface StateProps {
+    isWaitingSignin: boolean;
+    signinErrorMsg: string;
+}
+
+class SigninPage extends Component<ActionProps & StateProps> {
+    public constructor(props: ActionProps & StateProps) {
         super(props);
+    }
+
+    public componentWillUnmount(): void {
+        this.props.resetSigninErrors();
     }
 
     private signInUser(credentials: Credentials): void {
@@ -21,13 +32,25 @@ class SigninPage extends Component<ActionProps> {
     public render(): ReactElement {
         return (
             <Layout>
-                <SigninView signinUser={this.signInUser.bind(this)} />
+                <SigninView
+                    signinErrorMsg={this.props.signinErrorMsg}
+                    isWaitingSignin={this.props.isWaitingSignin}
+                    signinUser={this.signInUser.bind(this)}
+                />
             </Layout>
         );
     }
 }
 
+const mapStateToProps = ({ auth }: StoreState): StateProps => {
+    const { isWaitingSignin, signinErrorMsg } = auth;
+    return {
+        isWaitingSignin,
+        signinErrorMsg,
+    };
+};
+
 export default connect(
-    null,
-    { signinUser },
+    mapStateToProps,
+    { signinUser, resetSigninErrors },
 )(SigninPage);

@@ -5,13 +5,19 @@ import SignupForm from '../../partials/SignupForm';
 
 interface Props {
     createCompany: Function;
+    isWaitingUserCreation: boolean;
+    signupErrorMsg: string;
 }
 
 const SignupPartial = (props: Props): ReactElement => {
     return (
         <section className="signup-partial">
             <h2 className="signup-partial__title">Cadastre-se</h2>
-            <SignupForm onSubmit={props.createCompany} />
+            <SignupForm
+                errorMsg={props.signupErrorMsg}
+                isLoading={props.isWaitingUserCreation}
+                onSubmit={props.createCompany}
+            />
             <Link href="/signin">
                 <a className="signup-partial__signup-link">Entrar</a>
             </Link>

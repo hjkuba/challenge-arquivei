@@ -5,9 +5,13 @@ import reducers, { StoreState } from './reducers';
 const exampleInitialState: StoreState = {
     user: {
         company: null,
+        isWaitingUserCreation: false,
+        signupErrorMsg: '',
     },
     auth: {
         isLogged: false,
+        isWaitingSignin: false,
+        signinErrorMsg: '',
         uid: null,
     },
     purchase: {
@@ -23,6 +27,8 @@ const exampleInitialState: StoreState = {
     },
     checkout: {
         activeConfirmationView: false,
+        isWaitingPayment: false,
+        checkoutErrorMsg: '',
     },
 };
 

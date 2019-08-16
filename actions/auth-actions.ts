@@ -8,15 +8,28 @@ import { fetchCompanyInfo } from './user-actions';
 export enum AuthActionTypes {
     IS_LOGGED = 'IS_LOGGED',
     SIGN_OUT = 'SIGN_OUT',
+    ON_LOGIN_REQUEST = 'ON_LOGIN_REQUEST',
+    ON_LOGIN_SUCCEED = 'ON_LOGIN_SUCCEED',
+    ON_LOGIN_ERROR = 'ON_LOGIN_ERROR',
+    RESET_SIGNIN_ERRORS = 'RESET_SIGNIN_ERRORS',
 }
 
 export const signinUser = (credentials: Credentials): ThunkAction<unknown, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
+        dispatch({
+            type: AuthActionTypes.ON_LOGIN_REQUEST,
+        });
         try {
             await firebase.signinUser(credentials);
+            dispatch({
+                type: AuthActionTypes.ON_LOGIN_SUCCEED,
+            });
             dispatch((): Promise<boolean> => Router.push('/'));
         } catch (err) {
-            throw err;
+            dispatch({
+                type: AuthActionTypes.ON_LOGIN_ERROR,
+                payload: err.message,
+            });
         }
     };
 };
@@ -58,5 +71,11 @@ export const signOut = (): ThunkAction<unknown, {}, {}, AnyAction> => {
         } catch (err) {
             throw err;
         }
+    };
+};
+
+export const resetSigninErrors = (): AnyAction => {
+    return {
+        type: AuthActionTypes.RESET_SIGNIN_ERRORS,
     };
 };

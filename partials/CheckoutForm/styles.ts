@@ -16,6 +16,10 @@ export const styles = css`
         margin-top: 14px;
     }
 
+    .checkout-form > :global(.alert) {
+        margin-bottom: 16px;
+    }
+
     .checkout-form__cvv-expiration-container {
         display: flex;
         flex-direction: row;

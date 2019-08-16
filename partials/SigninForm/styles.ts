@@ -15,4 +15,8 @@ export const styles = css`
     .signin-form > :global(.button) {
         margin-top: 14px;
     }
+
+    .signin-form > :global(.alert) {
+        margin-bottom: 16px;
+    }
 `;

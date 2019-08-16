@@ -2,10 +2,14 @@ import { ReactElement, useState, ChangeEvent } from 'react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { styles } from './styles';
+import Loader from '../../components/Loader';
+import Alert from '../../components/Alert';
 
 interface Props {
     onSubmit: Function;
     queryQuantity: number;
+    isLoading: boolean;
+    errorMsg: string;
 }
 
 const CheckoutForm = (props: Props): ReactElement => {
@@ -28,6 +32,7 @@ const CheckoutForm = (props: Props): ReactElement => {
 
     return (
         <div className="checkout-form">
+            {props.errorMsg ? <Alert type={Alert.types.ERROR}>{props.errorMsg}</Alert> : null}
             <Input name="cnpj" onChange={handleChange} value={form.cnpj} label="CNPJ" type={Input.types.TEXT} />
             <Input name="name" onChange={handleChange} value={form.name} label="Nome" type={Input.types.TEXT} />
             <Input
@@ -47,7 +52,11 @@ const CheckoutForm = (props: Props): ReactElement => {
                 />
                 <Input name="cvv" value={form.cvv} onChange={handleChange} label="CVV" type={Input.types.NUMBER} />
             </div>
-            <Button label="Confirmar Pagamento" type={Button.types.PRIMARY} onClick={handleSubmit} />
+            {props.isLoading ? (
+                <Loader size={Loader.sizes.SMALL} />
+            ) : (
+                <Button label="Confirmar Pagamento" type={Button.types.PRIMARY} onClick={handleSubmit} />
+            )}
             <style jsx>{styles}</style>
         </div>
     );

@@ -5,6 +5,7 @@ interface Props {
     label: string;
     type: ButtonType;
     onClick: Function;
+    disabled?: boolean;
 }
 
 enum ButtonType {
@@ -12,9 +13,11 @@ enum ButtonType {
     PRIMARY_ALT = 'button--primary-alt',
 }
 
-const Button = ({ label, type, onClick }: Props): ReactElement => {
+const Button = ({ label, type, onClick, disabled = false }: Props): ReactElement => {
+    const buttonDisabledClass = disabled ? 'button--disabled' : '';
+
     return (
-        <button onClick={(): void => onClick()} className={`button ${type}`}>
+        <button onClick={(): void => onClick()} className={`button ${type} ${buttonDisabledClass}`} disabled={disabled}>
             {label}
             <style jsx>{styles}</style>
         </button>

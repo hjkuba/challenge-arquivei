@@ -103,7 +103,7 @@ export const styles = css`
     }
 
     body {
-        font-family: Rubik;
+        font-family: Rubik, sans-serif;
         margin: 0;
     }
 `;

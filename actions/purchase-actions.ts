@@ -8,11 +8,13 @@ export enum PurchaseActionTypes {
     QUERY_QTD_CHANGE = 'QUERY_QTD_CHANGE',
     PROMOTION_FETCH = 'PROMOTION_FETCH',
     QUERIES_PURCHASED = 'QUERIES_PURCHASED',
+    RESET_QUERIES = 'RESET_QUERIES',
 }
 
-export const changeQueryInput = (inputValue: string | number, company: Company, promotion: Promotion): AnyAction => {
+export const changeQueryInput = (inputValue: string, company: Company, promotion: Promotion): AnyAction => {
+    const numberValue = toNumber(inputValue);
     const queryPriceMap = generateQueryPriceMap(
-        toNumber(inputValue),
+        numberValue,
         company.totalQueries,
         promotion['promotional-values'],
         promotion['default-value'],
@@ -23,7 +25,7 @@ export const changeQueryInput = (inputValue: string | number, company: Company, 
     return {
         type: PurchaseActionTypes.QUERY_QTD_CHANGE,
         payload: {
-            inputValue,
+            numberValue,
             queryPriceMap,
             totalValue,
         },
