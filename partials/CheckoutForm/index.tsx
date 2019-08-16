@@ -33,14 +33,22 @@ const CheckoutForm = (props: Props): ReactElement => {
     return (
         <div className="checkout-form">
             {props.errorMsg ? <Alert type={Alert.types.ERROR}>{props.errorMsg}</Alert> : null}
-            <Input name="cnpj" onChange={handleChange} value={form.cnpj} label="CNPJ" type={Input.types.TEXT} />
+            <Input
+                name="cnpj"
+                onChange={handleChange}
+                value={form.cnpj}
+                label="CNPJ"
+                type={Input.types.MASKED}
+                mask={Input.masks.CNPJ}
+            />
             <Input name="name" onChange={handleChange} value={form.name} label="Nome" type={Input.types.TEXT} />
             <Input
                 name="creditCard"
                 onChange={handleChange}
                 value={form.creditCard}
                 label="Número do Cartão de Crédito"
-                type={Input.types.NUMBER}
+                type={Input.types.MASKED}
+                mask={Input.masks.CREDIT_CARD}
             />
             <div className="checkout-form__cvv-expiration-container">
                 <Input
@@ -48,7 +56,8 @@ const CheckoutForm = (props: Props): ReactElement => {
                     onChange={handleChange}
                     value={form.expirationDate}
                     label="Data de Expiração"
-                    type={Input.types.DATE}
+                    type={Input.types.MASKED}
+                    mask={Input.masks.DATE}
                 />
                 <Input name="cvv" value={form.cvv} onChange={handleChange} label="CVV" type={Input.types.NUMBER} />
             </div>

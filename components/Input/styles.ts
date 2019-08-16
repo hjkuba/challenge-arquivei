@@ -16,7 +16,7 @@ export const styles = css`
         color: ${COLOR_DARK};
     }
 
-    .input__input-field {
+    .input :global(.input__input-field) {
         box-sizing: border-box;
         height: 40px;
         width: 100%;
@@ -28,7 +28,7 @@ export const styles = css`
         background-color: ${COLOR_GREY_100};
     }
 
-    .input__input-field:focus {
+    .input :global(.input__input-field:focus) {
         outline: none;
     }
 `;
