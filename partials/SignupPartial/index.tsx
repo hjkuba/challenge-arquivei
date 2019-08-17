@@ -4,7 +4,7 @@ import { styles } from './styles';
 import SignupForm from '../../partials/SignupForm';
 
 interface Props {
-    createCompany: Function;
+    createUser: Function;
     isWaitingUserCreation: boolean;
     signupErrorMsg: string;
 }
@@ -16,7 +16,7 @@ const SignupPartial = (props: Props): ReactElement => {
             <SignupForm
                 errorMsg={props.signupErrorMsg}
                 isLoading={props.isWaitingUserCreation}
-                onSubmit={props.createCompany}
+                onSubmit={props.createUser}
             />
             <Link href="/signin">
                 <a className="signup-partial__signup-link">Entrar</a>

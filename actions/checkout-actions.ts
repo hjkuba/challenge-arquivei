@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import firebase from '../services/firebase';
+import firebaseCloudFunctionService from '../services/firebase-cloud-function-service';
 import Router from 'next/router';
 import { PurchaseActionTypes } from './purchase-actions';
 
@@ -13,14 +13,12 @@ export enum CheckoutActionTypes {
 }
 
 export const buyQueries = (uid: string, queries: number, data: any): ThunkAction<unknown, {}, {}, AnyAction> => {
-    console.log('Simulate checkout with form data: ', data);
-
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
         dispatch({
             type: CheckoutActionTypes.ON_PAYMENT_REQUEST,
         });
         try {
-            await firebase.insertQueries(uid, queries);
+            await firebaseCloudFunctionService.buyQueries(queries, data);
             dispatch({
                 type: PurchaseActionTypes.RESET_QUERIES,
             });

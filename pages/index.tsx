@@ -49,7 +49,6 @@ class HomePage extends Component<ActionProps & StateProps> {
 
     public componentDidMount(): void {
         this.props.checkAuth();
-        this.props.fetchPromotion();
     }
 
     public render(): ReactElement {

@@ -6,12 +6,12 @@ class MyDocument extends Document {
     public render(): ReactElement {
         return (
             <Html>
+                <style jsx>{styles}</style>
                 <Head />
                 <body>
                     <Main />
                     <NextScript />
                 </body>
-                <style jsx>{styles}</style>
             </Html>
         );
     }
