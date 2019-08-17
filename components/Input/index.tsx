@@ -9,6 +9,7 @@ interface Props {
     onChange: Function;
     value?: string | number;
     name: string;
+    warningMsg?: string;
 }
 
 enum InputType {
@@ -22,7 +23,8 @@ enum InputType {
 enum MaskType {
     CNPJ = 'cnpj',
     CREDIT_CARD = 'creditCard',
-    DATE = 'date',
+    EXPIRATION_DATE = 'expirationDate',
+    CVV = 'cvv',
 }
 
 const masks: Record<string, any> = {
@@ -48,10 +50,11 @@ const masks: Record<string, any> = {
         /\d/,
         /\d/,
     ],
-    date: [/[0-3]/, /\d/, '/', /[0-1]/, /\d/, '/', /2/, /\d/, /\d/, /\d/],
+    expirationDate: [/[0-1]/, /\d/, '/', /2/, /\d/, /\d/, /\d/],
+    cvv: [/\d/, /\d/, /\d/],
 };
 
-const Input = ({ label, type, mask, onChange, value, name }: Props): ReactElement => {
+const Input = ({ label, type, mask, onChange, value, name, warningMsg }: Props): ReactElement => {
     const renderMaskedInput = (): ReactElement => {
         return (
             <MaskedInput
@@ -78,7 +81,7 @@ const Input = ({ label, type, mask, onChange, value, name }: Props): ReactElemen
                     type={type}
                 />
             )}
-
+            <span className="input__warning">{warningMsg ? warningMsg : ''}</span>
             <style jsx>{styles}</style>
         </div>
     );

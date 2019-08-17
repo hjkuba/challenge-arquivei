@@ -8,10 +8,10 @@ class MyDocument extends Document {
             <Html>
                 <Head />
                 <body>
-                    <style jsx>{styles}</style>
                     <Main />
                     <NextScript />
                 </body>
+                <style jsx>{styles}</style>
             </Html>
         );
     }

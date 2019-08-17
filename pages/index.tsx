@@ -35,7 +35,12 @@ class HomePage extends Component<ActionProps & StateProps> {
     }
 
     private handleQueryInput(event: ChangeEvent<HTMLInputElement>): void {
-        this.props.changeQueryInput(event.target.value, this.props.company, this.props.promotion);
+        const maxValue = 1000000;
+        let value = Math.round(parseFloat(event.target.value));
+        if (value > maxValue) {
+            value = maxValue;
+        }
+        this.props.changeQueryInput(value, this.props.company, this.props.promotion);
     }
 
     private handlePurchaseAction(): void {

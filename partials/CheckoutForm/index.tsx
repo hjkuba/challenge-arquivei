@@ -4,6 +4,14 @@ import Button from '../../components/Button';
 import { styles } from './styles';
 import Loader from '../../components/Loader';
 import Alert from '../../components/Alert';
+import validate, {
+    validateCNPJPattern,
+    validateCreditCardPattern,
+    validateFilledText,
+    validateLuhnAlg,
+    validateExpirationDate,
+    validateCVV,
+} from '../../helpers/validators';
 
 interface Props {
     onSubmit: Function;
@@ -13,6 +21,14 @@ interface Props {
 }
 
 const CheckoutForm = (props: Props): ReactElement => {
+    const initialValidationState = {
+        cnpj: '',
+        name: '',
+        creditCard: '',
+        expirationDate: '',
+        cvv: '',
+    };
+
     const [form, setForm] = useState({
         cnpj: '',
         name: '',
@@ -21,12 +37,30 @@ const CheckoutForm = (props: Props): ReactElement => {
         cvv: '',
     });
 
+    const [validationErrors, setValidationErrors] = useState(initialValidationState);
+
+    const validationRules: Record<string, Function[]> = {
+        cnpj: [validateCNPJPattern],
+        name: [validateFilledText],
+        creditCard: [validateCreditCardPattern, validateLuhnAlg],
+        expirationDate: [validateExpirationDate],
+        cvv: [validateCVV],
+    };
+
     function handleChange(event: ChangeEvent<HTMLInputElement>): void {
         const { name, value } = event.target;
         setForm({ ...form, [name]: value });
     }
 
     function handleSubmit(): void {
+        const validationResults = validate(form, validationRules);
+
+        if (!validationResults.isValid) {
+            setValidationErrors(validationResults.errorMsgs);
+            return;
+        }
+
+        setValidationErrors(initialValidationState);
         props.onSubmit(props.queryQuantity, form);
     }
 
@@ -40,8 +74,16 @@ const CheckoutForm = (props: Props): ReactElement => {
                 label="CNPJ"
                 type={Input.types.MASKED}
                 mask={Input.masks.CNPJ}
+                warningMsg={validationErrors.cnpj}
             />
-            <Input name="name" onChange={handleChange} value={form.name} label="Nome" type={Input.types.TEXT} />
+            <Input
+                name="name"
+                onChange={handleChange}
+                value={form.name}
+                label="Nome"
+                type={Input.types.TEXT}
+                warningMsg={validationErrors.name}
+            />
             <Input
                 name="creditCard"
                 onChange={handleChange}
@@ -49,6 +91,7 @@ const CheckoutForm = (props: Props): ReactElement => {
                 label="Número do Cartão de Crédito"
                 type={Input.types.MASKED}
                 mask={Input.masks.CREDIT_CARD}
+                warningMsg={validationErrors.creditCard}
             />
             <div className="checkout-form__cvv-expiration-container">
                 <Input
@@ -57,9 +100,18 @@ const CheckoutForm = (props: Props): ReactElement => {
                     value={form.expirationDate}
                     label="Data de Expiração"
                     type={Input.types.MASKED}
-                    mask={Input.masks.DATE}
+                    mask={Input.masks.EXPIRATION_DATE}
+                    warningMsg={validationErrors.expirationDate}
                 />
-                <Input name="cvv" value={form.cvv} onChange={handleChange} label="CVV" type={Input.types.NUMBER} />
+                <Input
+                    name="cvv"
+                    value={form.cvv}
+                    onChange={handleChange}
+                    label="CVV"
+                    type={Input.types.MASKED}
+                    mask={Input.masks.CVV}
+                    warningMsg={validationErrors.cvv}
+                />
             </div>
             {props.isLoading ? (
                 <Loader size={Loader.sizes.SMALL} />
