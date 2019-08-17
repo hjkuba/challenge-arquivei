@@ -48,23 +48,6 @@ class FirebaseService {
         return await this.firebaseAuth.signOut();
     }
 
-    public async createCompany(credentials: Credentials, company: Company): Promise<Company> {
-        try {
-            const userCredentials = await this.firebaseAuth.createUserWithEmailAndPassword(
-                credentials.email,
-                credentials.password,
-            );
-
-            const { user } = userCredentials;
-
-            if (!user) throw new Error('User not found');
-
-            return await this.insertCompanyInfo(user.uid, company);
-        } catch (err) {
-            throw err;
-        }
-    }
-
     public async fetchCompanyInfo(userId: string): Promise<Company> {
         try {
             return await this.firebaseDatabase
@@ -114,18 +97,6 @@ class FirebaseService {
                     totalQueries: firebase.firestore.FieldValue.increment(queries),
                     currentQueries: firebase.firestore.FieldValue.increment(queries),
                 });
-        } catch (err) {
-            throw err;
-        }
-    }
-
-    private async insertCompanyInfo(userId: string, company: Company): Promise<Company> {
-        try {
-            return await this.firebaseDatabase
-                .collection('users')
-                .doc(userId)
-                .set(company)
-                .then((): Company => company);
         } catch (err) {
             throw err;
         }

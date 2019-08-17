@@ -3,6 +3,7 @@ import Router from 'next/router';
 import firebase from '../services/firebase';
 import { ThunkDispatch, ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
+import firebaseCloudFunctionService from '../services/firebase-cloud-function-service';
 
 export enum UserActionTypes {
     COMPANY_FETCH = 'COMPANY_FETCH',
@@ -18,11 +19,11 @@ export const createCompany = (credentials: Credentials, company: Company): Thunk
             type: UserActionTypes.ON_USER_CREATE_REQUEST,
         });
         try {
-            await firebase.createCompany(credentials, company);
+            await firebaseCloudFunctionService.signup(credentials, company);
             dispatch({
                 type: UserActionTypes.ON_USER_CREATE_SUCCEED,
             });
-            dispatch((): Promise<boolean> => Router.push('/'));
+            dispatch((): Promise<boolean> => Router.push('/signin'));
         } catch (err) {
             dispatch({
                 type: UserActionTypes.ON_USER_CREATE_FAIL,
