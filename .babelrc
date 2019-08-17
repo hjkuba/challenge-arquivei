@@ -1,0 +1,14 @@
+{
+    "env": {
+        "test": {
+            "presets": ["next/babel"],
+            "plugins": ["styled-jsx/babel-test"],
+        },
+        "development": {
+            "presets": ["next/babel"],
+        },
+        "production": {
+            "presets": ["next/babel"],
+        }
+    },
+}
