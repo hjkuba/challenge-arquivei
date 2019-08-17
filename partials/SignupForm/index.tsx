@@ -5,6 +5,7 @@ import Alert from '../../components/Alert';
 import { styles } from './styles';
 import { Credentials, Company } from '../../types';
 import Loader from '../../components/Loader';
+import validate, { validateFilledText, validateCNPJPattern } from '../../helpers/validators';
 
 interface Props {
     onSubmit: Function;
@@ -13,6 +14,14 @@ interface Props {
 }
 
 const SignupForm = (props: Props): ReactElement => {
+    const initialValidationState = {
+        companyName: '',
+        tradingName: '',
+        cnpj: '',
+        email: '',
+        password: '',
+    };
+
     const [form, setForm] = useState({
         companyName: '',
         tradingName: '',
@@ -21,12 +30,31 @@ const SignupForm = (props: Props): ReactElement => {
         password: '',
     });
 
+    const [validationErrors, setValidationErrors] = useState(initialValidationState);
+
+    const validationRules: Record<string, Function[]> = {
+        companyName: [validateFilledText],
+        tradingName: [validateFilledText],
+        cnpj: [validateCNPJPattern],
+        email: [validateFilledText],
+        password: [validateFilledText],
+    };
+
     function handleChange(event: ChangeEvent<HTMLInputElement>): void {
         const { name, value } = event.target;
         setForm({ ...form, [name]: value });
     }
 
     function handleSubmit(): void {
+        const validationResults = validate(form, validationRules);
+
+        if (!validationResults.isValid) {
+            setValidationErrors(validationResults.errorMsgs);
+            return;
+        }
+
+        setValidationErrors(initialValidationState);
+
         const credentials: Credentials = {
             email: form.email,
             password: form.password,
@@ -54,6 +82,7 @@ const SignupForm = (props: Props): ReactElement => {
                 label="CNPJ"
                 type={Input.types.MASKED}
                 mask={Input.masks.CNPJ}
+                warningMsg={validationErrors.cnpj}
             />
             <Input
                 name="tradingName"
@@ -61,6 +90,7 @@ const SignupForm = (props: Props): ReactElement => {
                 value={form.tradingName}
                 label="Nome Fantasia"
                 type={Input.types.TEXT}
+                warningMsg={validationErrors.tradingName}
             />
             <Input
                 name="companyName"
@@ -68,14 +98,23 @@ const SignupForm = (props: Props): ReactElement => {
                 value={form.companyName}
                 label="Razão Social"
                 type={Input.types.TEXT}
+                warningMsg={validationErrors.companyName}
             />
-            <Input name="email" onChange={handleChange} value={form.email} label="E-mail" type={Input.types.EMAIL} />
+            <Input
+                name="email"
+                onChange={handleChange}
+                value={form.email}
+                label="E-mail"
+                type={Input.types.EMAIL}
+                warningMsg={validationErrors.email}
+            />
             <Input
                 name="password"
                 onChange={handleChange}
                 value={form.password}
                 label="Senha"
                 type={Input.types.PASSWORD}
+                warningMsg={validationErrors.password}
             />
             {props.isLoading ? (
                 <Loader size={Loader.sizes.SMALL} />
