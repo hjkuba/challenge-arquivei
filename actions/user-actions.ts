@@ -1,9 +1,9 @@
 import { Company, Credentials } from '../types';
-import Router from 'next/router';
 import firebase from '../services/firebase';
 import { ThunkDispatch, ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import firebaseCloudFunctionService from '../services/firebase-cloud-function-service';
+import { signOut } from './auth-actions';
 
 export enum UserActionTypes {
     COMPANY_FETCH = 'COMPANY_FETCH',
@@ -13,7 +13,7 @@ export enum UserActionTypes {
     RESET_SIGNUP_ERRORS = 'RESET_SIGNUP_ERRORS',
 }
 
-export const createCompany = (credentials: Credentials, company: Company): ThunkAction<unknown, {}, {}, AnyAction> => {
+export const createUser = (credentials: Credentials, company: Company): ThunkAction<unknown, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
         dispatch({
             type: UserActionTypes.ON_USER_CREATE_REQUEST,
@@ -23,7 +23,7 @@ export const createCompany = (credentials: Credentials, company: Company): Thunk
             dispatch({
                 type: UserActionTypes.ON_USER_CREATE_SUCCEED,
             });
-            dispatch((): Promise<boolean> => Router.push('/signin'));
+            dispatch(signOut());
         } catch (err) {
             dispatch({
                 type: UserActionTypes.ON_USER_CREATE_FAIL,

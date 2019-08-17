@@ -4,6 +4,7 @@ import firebase from '../services/firebase';
 import { ThunkDispatch, ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { fetchCompanyInfo } from './user-actions';
+import { fetchPromotion } from './purchase-actions';
 
 export enum AuthActionTypes {
     IS_LOGGED = 'IS_LOGGED',
@@ -48,6 +49,7 @@ export const checkAuth = (): ThunkAction<unknown, {}, {}, AnyAction> => {
                     },
                 });
                 dispatch(fetchCompanyInfo(user.uid));
+                dispatch(fetchPromotion());
                 return;
             }
 

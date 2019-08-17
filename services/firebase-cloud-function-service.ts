@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Credentials, Company } from '../types';
+import indexedDBService from './indexedDB-service';
 
 class FirebaseCloudFunctionsService {
     private baseUrl: string;
@@ -19,6 +20,29 @@ class FirebaseCloudFunctionsService {
                 {
                     headers: {
                         'Content-type': 'application/json',
+                    },
+                },
+            );
+
+            return;
+        } catch (err) {
+            throw new Error(err.response.data.message);
+        }
+    }
+
+    public async buyQueries(queries: number, data: any): Promise<void> {
+        try {
+            const userAuthObj = await indexedDBService.getAuthUserObject();
+            await axios.post(
+                `${this.baseUrl}/purchase`,
+                {
+                    queries,
+                    ...data,
+                },
+                {
+                    headers: {
+                        'Content-type': 'application/json',
+                        authorization: `${userAuthObj.stsTokenManager.accessToken}`,
                     },
                 },
             );

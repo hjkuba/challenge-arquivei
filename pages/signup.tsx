@@ -2,12 +2,12 @@ import { ReactElement, Component } from 'react';
 import Layout from '../components/Layout';
 import SignupView from '../views/SignupView';
 import { connect } from 'react-redux';
-import { createCompany, resetSignupErrors } from '../actions/user-actions';
+import { createUser, resetSignupErrors } from '../actions/user-actions';
 import { Company, Credentials } from '../types';
 import { StoreState } from '../reducers';
 
 interface ActionProps {
-    createCompany: Function;
+    createUser: Function;
     resetSignupErrors: Function;
 }
 
@@ -25,8 +25,8 @@ class SignupPage extends Component<ActionProps & StateProps> {
         this.props.resetSignupErrors();
     }
 
-    private createCompany(credentials: Credentials, company: Company): void {
-        this.props.createCompany(credentials, company);
+    private createUser(credentials: Credentials, company: Company): void {
+        this.props.createUser(credentials, company);
     }
 
     public render(): ReactElement {
@@ -35,7 +35,7 @@ class SignupPage extends Component<ActionProps & StateProps> {
                 <SignupView
                     signupErrorMsg={this.props.signupErrorMsg}
                     isWaitingUserCreation={this.props.isWaitingUserCreation}
-                    createCompany={this.createCompany.bind(this)}
+                    createUser={this.createUser.bind(this)}
                 />
             </Layout>
         );
@@ -52,5 +52,5 @@ const mapStateToProps = ({ user }: StoreState): StateProps => {
 
 export default connect(
     mapStateToProps,
-    { createCompany, resetSignupErrors },
+    { createUser, resetSignupErrors },
 )(SignupPage);

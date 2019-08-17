@@ -3,7 +3,7 @@ import SignupPartial from '../../partials/SignupPartial';
 import { styles } from './styles';
 
 interface Props {
-    createCompany: Function;
+    createUser: Function;
     isWaitingUserCreation: boolean;
     signupErrorMsg: string;
 }
@@ -14,7 +14,7 @@ const SignupView = (props: Props): ReactElement => {
             <SignupPartial
                 signupErrorMsg={props.signupErrorMsg}
                 isWaitingUserCreation={props.isWaitingUserCreation}
-                createCompany={props.createCompany}
+                createUser={props.createUser}
             />
             <style jsx>{styles}</style>
         </div>
