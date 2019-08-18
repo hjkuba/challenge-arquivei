@@ -6,7 +6,7 @@ interface Props {
     children: string;
 }
 
-const ProfileTemplate = ({ label, children }: Props): ReactElement => {
+const LabelText = ({ label, children }: Props): ReactElement => {
     return (
         <div className="label-text">
             <span className="label-text__label">{label}</span>
@@ -16,4 +16,4 @@ const ProfileTemplate = ({ label, children }: Props): ReactElement => {
     );
 };
 
-export default ProfileTemplate;
+export default LabelText;

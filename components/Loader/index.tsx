@@ -6,15 +6,15 @@ interface Props {
 }
 
 enum LoaderSize {
-    LARGE = 'loader__spinner--lg',
-    MEDIUM = 'loader__spinner--md',
     SMALL = 'loader__spinner--sm',
+    MEDIUM = 'loader__spinner--md',
+    LARGE = 'loader__spinner--lg',
 }
 
-const Loader = (props: Props): ReactElement => {
+const Loader = ({ size }: Props): ReactElement => {
     return (
         <div className="loader">
-            <span className={`loader__spinner ${props.size}`}></span>
+            <span className={`loader__spinner ${size}`}></span>
             <style jsx>{styles}</style>
         </div>
     );
