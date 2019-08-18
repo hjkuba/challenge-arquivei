@@ -12,7 +12,7 @@ enum AlertType {
     ERROR = 'alert--error',
 }
 
-const Alert = ({ children, type }: Props): ReactElement => {
+const Alert = ({ type, children }: Props): ReactElement => {
     return (
         <p className={`alert ${type}`}>
             {children}

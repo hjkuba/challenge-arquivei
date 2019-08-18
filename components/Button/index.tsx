@@ -13,7 +13,7 @@ enum ButtonType {
     PRIMARY_ALT = 'button--primary-alt',
 }
 
-const Button = ({ label, type, onClick, disabled = false }: Props): ReactElement => {
+const Button = ({ label, type, disabled = false, onClick }: Props): ReactElement => {
     const buttonDisabledClass = disabled ? 'button--disabled' : '';
 
     return (
