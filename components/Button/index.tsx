@@ -4,8 +4,8 @@ import { styles } from './styles';
 interface Props {
     label: string;
     type: ButtonType;
-    onClick: Function;
     disabled?: boolean;
+    onClick: Function;
 }
 
 enum ButtonType {
