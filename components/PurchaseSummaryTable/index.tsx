@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
-import { styles } from './styles';
-import { QueryPricing } from '../../types';
 import { toBRL } from '../../helpers/purchase-price';
+import { QueryPricing } from '../../types';
+import { styles } from './styles';
 
 interface Props {
     currentQueries: number;
@@ -9,9 +9,7 @@ interface Props {
     queryPriceMap: QueryPricing[];
 }
 
-const PurchaseSummaryTable = (props: Props): ReactElement => {
-    const { currentQueries, totalPrice, queryPriceMap } = props;
-
+const PurchaseSummaryTable = ({ currentQueries, totalPrice, queryPriceMap }: Props): ReactElement => {
     const renderQueryPriceList = (queryPriceMap: QueryPricing[]): ReactElement[] => {
         return queryPriceMap.map(
             (queryPrice, index): ReactElement => {
@@ -39,7 +37,7 @@ const PurchaseSummaryTable = (props: Props): ReactElement => {
                 </thead>
                 <tbody className="purchase-summary-table__tbody">{renderQueryPriceList(queryPriceMap)}</tbody>
             </table>
-            <table>
+            <table className="purchase-summary-table__results-table">
                 <thead className="purchase-summary-table__total-thead">
                     <tr>
                         <th>Total de Consultas</th>

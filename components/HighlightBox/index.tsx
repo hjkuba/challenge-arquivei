@@ -2,9 +2,9 @@ import { ReactElement } from 'react';
 import { styles } from './styles';
 
 interface Props {
-    children: ReactElement | ReactElement[];
     type: HighlightBoxType;
     alignment: HighlightBoxAlignment;
+    children: ReactElement | ReactElement[];
 }
 
 enum HighlightBoxType {
@@ -21,7 +21,7 @@ enum HighlightBoxAlignment {
     RIGHT = 'highlight-box--right',
 }
 
-const HighlightBox = ({ children, type, alignment }: Props): ReactElement => {
+const HighlightBox = ({ type, alignment, children }: Props): ReactElement => {
     return (
         <div className={`highlight-box ${type} ${alignment}`}>
             {children}

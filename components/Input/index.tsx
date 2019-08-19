@@ -3,18 +3,18 @@ import { ReactElement } from 'react';
 import { styles } from './styles';
 
 interface Props {
-    label?: string;
-    type: InputType;
-    mask?: MaskType;
-    onChange: Function;
-    value?: string | number;
     name: string;
+    type: InputType;
+    label?: string;
+    value?: string | number;
+    mask?: MaskType;
     warningMsg?: string;
+    onChange: Function;
 }
 
 enum InputType {
-    NUMBER = 'number',
     TEXT = 'text',
+    NUMBER = 'number',
     EMAIL = 'email',
     PASSWORD = 'password',
     MASKED = 'masked',
@@ -23,8 +23,8 @@ enum InputType {
 enum MaskType {
     CNPJ = 'cnpj',
     CREDIT_CARD = 'creditCard',
-    EXPIRATION_DATE = 'expirationDate',
     CVV = 'cvv',
+    EXPIRATION_DATE = 'expirationDate',
 }
 
 const masks: Record<string, any> = {
@@ -50,11 +50,11 @@ const masks: Record<string, any> = {
         /\d/,
         /\d/,
     ],
-    expirationDate: [/[0-1]/, /\d/, '/', /2/, /\d/, /\d/, /\d/],
     cvv: [/\d/, /\d/, /\d/],
+    expirationDate: [/[0-1]/, /\d/, '/', /2/, /\d/, /\d/, /\d/],
 };
 
-const Input = ({ label, type, mask, onChange, value, name, warningMsg }: Props): ReactElement => {
+const Input = ({ name, type, label, value, mask, warningMsg, onChange }: Props): ReactElement => {
     const renderMaskedInput = (): ReactElement => {
         return (
             <MaskedInput
@@ -62,7 +62,7 @@ const Input = ({ label, type, mask, onChange, value, name, warningMsg }: Props):
                 onChange={(e): void => onChange(e)}
                 name={name}
                 value={value}
-                className="input__input-field"
+                className="input__input-field input__masked-input"
             />
         );
     };

@@ -8,7 +8,7 @@ interface Props {
 const Layout = ({ children }: Props): ReactElement => {
     return (
         <main className="layout">
-            <h1 className="layout__title">Teste</h1>
+            <h1 className="layout__title">Arquivei FrontEnd Challenge</h1>
             {children}
             <style jsx>{styles}</style>
         </main>

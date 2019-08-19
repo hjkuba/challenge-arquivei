@@ -4,8 +4,8 @@ import { styles } from './styles';
 interface Props {
     label: string;
     type: ButtonType;
-    onClick: Function;
     disabled?: boolean;
+    onClick: Function;
 }
 
 enum ButtonType {
@@ -13,7 +13,7 @@ enum ButtonType {
     PRIMARY_ALT = 'button--primary-alt',
 }
 
-const Button = ({ label, type, onClick, disabled = false }: Props): ReactElement => {
+const Button = ({ label, type, disabled = false, onClick }: Props): ReactElement => {
     const buttonDisabledClass = disabled ? 'button--disabled' : '';
 
     return (
