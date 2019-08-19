@@ -2,18 +2,18 @@ import { ReactElement, useState, ChangeEvent } from 'react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Alert from '../../components/Alert';
-import { styles } from './styles';
-import { Credentials, Company } from '../../types';
 import Loader from '../../components/Loader';
 import validate, { validateFilledText, validateCNPJ } from '../../helpers/validators';
+import { Credentials, Company } from '../../types';
+import { styles } from './styles';
 
 interface Props {
-    onSubmit: Function;
     isLoading: boolean;
     errorMsg: string;
+    onSubmit: Function;
 }
 
-const SignupForm = (props: Props): ReactElement => {
+const SignupForm = ({ isLoading, errorMsg, onSubmit }: Props): ReactElement => {
     const initialValidationState = {
         companyName: '',
         tradingName: '',
@@ -69,12 +69,12 @@ const SignupForm = (props: Props): ReactElement => {
             currentQueries: 0,
         };
 
-        props.onSubmit(credentials, company);
+        onSubmit(credentials, company);
     }
 
     return (
         <div className="signup-form">
-            {props.errorMsg ? <Alert type={Alert.types.ERROR}>{props.errorMsg}</Alert> : null}
+            {errorMsg ? <Alert type={Alert.types.ERROR}>{errorMsg}</Alert> : null}
             <Input
                 name="cnpj"
                 onChange={handleChange}
@@ -116,7 +116,7 @@ const SignupForm = (props: Props): ReactElement => {
                 type={Input.types.PASSWORD}
                 warningMsg={validationErrors.password}
             />
-            {props.isLoading ? (
+            {isLoading ? (
                 <Loader size={Loader.sizes.SMALL} />
             ) : (
                 <Button onClick={handleSubmit} label="Cadastrar" type={Button.types.PRIMARY} />

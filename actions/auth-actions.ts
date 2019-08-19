@@ -1,10 +1,10 @@
-import { Credentials } from '../types';
 import Router from 'next/router';
-import firebase from '../services/firebase';
-import { ThunkDispatch, ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
+import { ThunkDispatch, ThunkAction } from 'redux-thunk';
 import { fetchCompanyInfo } from './user-actions';
 import { fetchPromotion } from './purchase-actions';
+import firebase from '../services/firebase';
+import { Credentials } from '../types';
 
 export enum AuthActionTypes {
     IS_LOGGED = 'IS_LOGGED',

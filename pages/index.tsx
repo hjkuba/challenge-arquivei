@@ -1,13 +1,13 @@
+import Router from 'next/router';
 import { ReactElement, Component, ChangeEvent } from 'react';
-import Layout from '../components/Layout';
-import HomeView from '../views/HomeView';
-import Loader from '../components/Loader';
 import { connect } from 'react-redux';
-import { Company, Promotion, QueryPricing } from '../types';
 import { checkAuth, signOut } from '../actions/auth-actions';
 import { changeQueryInput, fetchPromotion } from '../actions/purchase-actions';
 import { StoreState } from '../reducers';
-import Router from 'next/router';
+import HomeView from '../views/HomeView';
+import Layout from '../components/Layout';
+import Loader from '../components/Loader';
+import { Company, Promotion, QueryPricing } from '../types';
 
 interface ActionProps {
     checkAuth: Function;
@@ -52,17 +52,18 @@ class HomePage extends Component<ActionProps & StateProps> {
     }
 
     public render(): ReactElement {
+        const { isLogged, company, promotion, currentQueries, totalPrice, queryPriceMap } = this.props;
         return (
             <Layout>
-                {this.props.isLogged && this.props.company && this.props.promotion ? (
+                {isLogged && company && promotion ? (
                     <HomeView
+                        currentQueries={currentQueries}
+                        company={company}
+                        totalPrice={totalPrice}
+                        queryPriceMap={queryPriceMap}
                         onSignout={this.signOut.bind(this)}
                         onPurchase={this.handlePurchaseAction.bind(this)}
                         onQueryQtdChange={this.handleQueryInput.bind(this)}
-                        currentQueries={this.props.currentQueries}
-                        company={this.props.company}
-                        totalPrice={this.props.totalPrice}
-                        queryPriceMap={this.props.queryPriceMap}
                     />
                 ) : (
                     <Loader />

@@ -1,8 +1,8 @@
+import Router from 'next/router';
 import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import firebaseCloudFunctionService from '../services/firebase-cloud-function-service';
-import Router from 'next/router';
 import { PurchaseActionTypes } from './purchase-actions';
+import firebaseCloudFunctionService from '../services/firebase-cloud-function-service';
 
 export enum CheckoutActionTypes {
     TO_DASHBOARD = 'TO_DASHBOARD',

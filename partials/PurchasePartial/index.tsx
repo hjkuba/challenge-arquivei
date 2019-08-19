@@ -1,21 +1,26 @@
 import { ReactElement } from 'react';
-import { styles } from './styles';
 import HighlightBox from '../../components/HighlightBox';
 import PurchaseSummaryTable from '../../components/PurchaseSummaryTable';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { QueryPricing } from '../../types';
+import { styles } from './styles';
 
 interface Props {
-    onQueryQtdChange: Function;
-    onPurchase: Function;
     currentQueries: number;
     totalPrice: number;
     queryPriceMap: QueryPricing[];
+    onPurchase: Function;
+    onQueryQtdChange: Function;
 }
 
-const PurchasePartial = (props: Props): ReactElement => {
-    const { onQueryQtdChange, onPurchase, currentQueries, totalPrice, queryPriceMap } = props;
+const PurchasePartial = ({
+    onQueryQtdChange,
+    onPurchase,
+    currentQueries,
+    totalPrice,
+    queryPriceMap,
+}: Props): ReactElement => {
     return (
         <section className="purchase-partial">
             <h2 className="purchase-partial__title">Adquira mais Consultas</h2>

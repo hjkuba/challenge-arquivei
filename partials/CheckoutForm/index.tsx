@@ -1,7 +1,6 @@
 import { ReactElement, useState, ChangeEvent } from 'react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { styles } from './styles';
 import Loader from '../../components/Loader';
 import Alert from '../../components/Alert';
 import validate, {
@@ -12,15 +11,16 @@ import validate, {
     validateExpirationDate,
     validateCVV,
 } from '../../helpers/validators';
+import { styles } from './styles';
 
 interface Props {
-    onSubmit: Function;
     queryQuantity: number;
-    isLoading: boolean;
     errorMsg: string;
+    isLoading: boolean;
+    onSubmit: Function;
 }
 
-const CheckoutForm = (props: Props): ReactElement => {
+const CheckoutForm = ({ queryQuantity, errorMsg, isLoading, onSubmit }: Props): ReactElement => {
     const initialValidationState = {
         cnpj: '',
         name: '',
@@ -61,12 +61,12 @@ const CheckoutForm = (props: Props): ReactElement => {
         }
 
         setValidationErrors(initialValidationState);
-        props.onSubmit(props.queryQuantity, form);
+        onSubmit(queryQuantity, form);
     }
 
     return (
         <div className="checkout-form">
-            {props.errorMsg ? <Alert type={Alert.types.ERROR}>{props.errorMsg}</Alert> : null}
+            {errorMsg ? <Alert type={Alert.types.ERROR}>{errorMsg}</Alert> : null}
             <Input
                 name="cnpj"
                 onChange={handleChange}
@@ -113,7 +113,7 @@ const CheckoutForm = (props: Props): ReactElement => {
                     warningMsg={validationErrors.cvv}
                 />
             </div>
-            {props.isLoading ? (
+            {isLoading ? (
                 <Loader size={Loader.sizes.SMALL} />
             ) : (
                 <Button label="Confirmar Pagamento" type={Button.types.PRIMARY} onClick={handleSubmit} />

@@ -1,23 +1,19 @@
-import { ReactElement } from 'react';
 import Link from 'next/link';
-import { styles } from './styles';
+import { ReactElement } from 'react';
 import SignupForm from '../../partials/SignupForm';
+import { styles } from './styles';
 
 interface Props {
-    createUser: Function;
     isWaitingUserCreation: boolean;
     signupErrorMsg: string;
+    createUser: Function;
 }
 
-const SignupPartial = (props: Props): ReactElement => {
+const SignupPartial = ({ isWaitingUserCreation, signupErrorMsg, createUser }: Props): ReactElement => {
     return (
         <section className="signup-partial">
             <h2 className="signup-partial__title">Cadastre-se</h2>
-            <SignupForm
-                errorMsg={props.signupErrorMsg}
-                isLoading={props.isWaitingUserCreation}
-                onSubmit={props.createUser}
-            />
+            <SignupForm errorMsg={signupErrorMsg} isLoading={isWaitingUserCreation} onSubmit={createUser} />
             <Link href="/signin">
                 <a className="signup-partial__signup-link">Entrar</a>
             </Link>
