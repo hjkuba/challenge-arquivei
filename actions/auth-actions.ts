@@ -3,7 +3,7 @@ import { AnyAction } from 'redux';
 import { ThunkDispatch, ThunkAction } from 'redux-thunk';
 import { fetchCompanyInfo } from './user-actions';
 import { fetchPromotion } from './purchase-actions';
-import firebase from '../services/firebase';
+import firebase from '../services/firebase-service';
 import { Credentials } from '../types';
 
 export enum AuthActionTypes {

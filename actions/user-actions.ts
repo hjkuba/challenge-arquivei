@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { ThunkDispatch, ThunkAction } from 'redux-thunk';
 import { signOut } from './auth-actions';
-import firebase from '../services/firebase';
+import firebase from '../services/firebase-service';
 import firebaseCloudFunctionService from '../services/firebase-cloud-function-service';
 import { Company, Credentials } from '../types';
 

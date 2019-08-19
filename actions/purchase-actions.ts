@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import firebase from '../services/firebase';
+import firebase from '../services/firebase-service';
 import { generateQueryPriceMap, toNumber, calculateTotalPrice } from '../helpers/purchase-price';
 import { Promotion, Company } from '../types';
 
