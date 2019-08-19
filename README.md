@@ -24,3 +24,6 @@ npm run test
 
 - Aplicação roda em **localhost:3000**
 - Também pode ser conferida aqui: https://arquiveifrontendchallenge.hjkuba1.now.sh/
+
+
+PS: Só há testes unitários para os componentes (building-blocks) e para os helpers usados na aplicação. Os outros testes serão desenvolvidos posteriormente
