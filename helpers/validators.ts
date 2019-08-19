@@ -27,6 +27,8 @@ export const validateExpirationDate = (value: string): boolean => {
     const month = parseInt(dateValues[0]) - 1;
     const year = parseInt(dateValues[1]);
 
+    if (month < 1) return false;
+
     if (Number.isNaN(month) || Number.isNaN(year) || month > 11 || new Date() > new Date(year, month + 1, 0))
         return false;
 
