@@ -5,7 +5,7 @@ import Alert from '../../components/Alert';
 import { styles } from './styles';
 import { Credentials, Company } from '../../types';
 import Loader from '../../components/Loader';
-import validate, { validateFilledText, validateCNPJPattern } from '../../helpers/validators';
+import validate, { validateFilledText, validateCNPJ } from '../../helpers/validators';
 
 interface Props {
     onSubmit: Function;
@@ -35,7 +35,7 @@ const SignupForm = (props: Props): ReactElement => {
     const validationRules: Record<string, Function[]> = {
         companyName: [validateFilledText],
         tradingName: [validateFilledText],
-        cnpj: [validateCNPJPattern],
+        cnpj: [validateCNPJ],
         email: [validateFilledText],
         password: [validateFilledText],
     };

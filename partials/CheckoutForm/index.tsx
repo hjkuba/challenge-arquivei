@@ -5,7 +5,7 @@ import { styles } from './styles';
 import Loader from '../../components/Loader';
 import Alert from '../../components/Alert';
 import validate, {
-    validateCNPJPattern,
+    validateCNPJ,
     validateCreditCardPattern,
     validateFilledText,
     validateLuhnAlg,
@@ -40,7 +40,7 @@ const CheckoutForm = (props: Props): ReactElement => {
     const [validationErrors, setValidationErrors] = useState(initialValidationState);
 
     const validationRules: Record<string, Function[]> = {
-        cnpj: [validateCNPJPattern],
+        cnpj: [validateCNPJ],
         name: [validateFilledText],
         creditCard: [validateCreditCardPattern, validateLuhnAlg],
         expirationDate: [validateExpirationDate],

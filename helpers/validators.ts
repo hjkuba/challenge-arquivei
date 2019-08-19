@@ -1,4 +1,3 @@
-export const validateCNPJPattern = (value: string): boolean => /\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}/.test(value);
 export const validateFilledText = (value: string): boolean => value.trim().length > 0;
 export const validateCreditCardPattern = (value: string): boolean => /\d{4}\s\d{4}\s\d{4}\s\d{4}/.test(value);
 export const validateLuhnAlg = (value: string): boolean => {
@@ -35,6 +34,52 @@ export const validateExpirationDate = (value: string): boolean => {
 };
 
 export const validateCVV = (value: string): boolean => value.replace(/\D/g, '').length === 3;
+
+export const validateCNPJ = (value: string): boolean => {
+    const isPatternValid = /\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}/.test(value);
+
+    if (!isPatternValid) return false;
+
+    const parsedValue = value.replace(/\D/g, '');
+
+    for (let i = 0; i < 10; i++) {
+        if (parsedValue === `${i}${i}${i}${i}${i}${i}${i}${i}${i}${i}${i}${i}${i}${i}`) {
+            return false;
+        }
+    }
+
+    let valueWithoutDVsize = parsedValue.length - 2;
+    let valueWithoutDV = parsedValue.substr(0, valueWithoutDVsize);
+    const dv = parsedValue.substring(valueWithoutDVsize);
+
+    let sum = 0;
+    let pos = valueWithoutDVsize - 7;
+
+    for (let i = valueWithoutDVsize; i >= 1; i--) {
+        sum += parseInt(valueWithoutDV.charAt(valueWithoutDVsize - i)) * pos--;
+        if (pos < 2) pos = 9;
+    }
+
+    let result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
+
+    if (result !== parseInt(dv.charAt(0))) return false;
+
+    valueWithoutDVsize = valueWithoutDVsize + 1;
+    valueWithoutDV = parsedValue.substring(0, valueWithoutDVsize);
+    sum = 0;
+    pos = valueWithoutDVsize - 7;
+
+    for (let i = valueWithoutDVsize; i >= 1; i--) {
+        sum += parseInt(valueWithoutDV.charAt(valueWithoutDVsize - i)) * pos--;
+        if (pos < 2) pos = 9;
+    }
+
+    result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
+
+    if (result !== parseInt(dv.charAt(1))) return false;
+
+    return true;
+};
 
 export default (formData: any, validationRules: Record<string, Function[]>): Record<string, any> => {
     const result: Record<string, any> = {
