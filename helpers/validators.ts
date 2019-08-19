@@ -96,7 +96,7 @@ export default (formData: any, validationRules: Record<string, Function[]>): Rec
 
         if (!isValid) {
             result.isValid = false;
-            result.errorMsgs[key] = `Campo inválido. Tente novamente`;
+            result.errorMsgs[key] = 'Campo inválido. Tente novamente';
         }
     });
 

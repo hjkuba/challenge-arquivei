@@ -1,4 +1,4 @@
-import {
+import validator, {
     validateCNPJ,
     validateCVV,
     validateCreditCardPattern,
@@ -73,5 +73,35 @@ describe('validateLuhnAlg', (): void => {
 
     it('should return "false" for an invalid Credit Card Number', (): void => {
         expect(validateLuhnAlg('6532156132513216')).toBe(false);
+    });
+});
+
+describe('validator', (): void => {
+    const formData = {
+        creditCard: '5522 2662 4130 8241',
+        cnpj: '45.454.098/0001-95',
+    };
+
+    const validationRules = {
+        creditCard: [validateCreditCardPattern, validateLuhnAlg],
+        cnpj: [validateCNPJ],
+    };
+
+    it('should generate a positive validation result', (): void => {
+        expect(validator(formData, validationRules)).toEqual({
+            isValid: true,
+            errorMsgs: {},
+        });
+    });
+
+    it('should generate a negative validation result', (): void => {
+        formData.creditCard = '5222 2662 4133 8056';
+
+        expect(validator(formData, validationRules)).toEqual({
+            isValid: false,
+            errorMsgs: {
+                creditCard: 'Campo inválido. Tente novamente',
+            },
+        });
     });
 });
