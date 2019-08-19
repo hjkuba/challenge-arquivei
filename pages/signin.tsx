@@ -1,10 +1,10 @@
 import { ReactElement, Component } from 'react';
-import Layout from '../components/Layout';
-import { signinUser, resetSigninErrors } from '../actions/auth-actions';
-import SigninView from '../views/SigninView';
 import { connect } from 'react-redux';
-import { Credentials } from '../types';
+import { signinUser, resetSigninErrors } from '../actions/auth-actions';
 import { StoreState } from '../reducers';
+import SigninView from '../views/SigninView';
+import Layout from '../components/Layout';
+import { Credentials } from '../types';
 
 interface ActionProps {
     signinUser: Function;
@@ -30,11 +30,12 @@ class SigninPage extends Component<ActionProps & StateProps> {
     }
 
     public render(): ReactElement {
+        const { signinErrorMsg, isWaitingSignin } = this.props;
         return (
             <Layout>
                 <SigninView
-                    signinErrorMsg={this.props.signinErrorMsg}
-                    isWaitingSignin={this.props.isWaitingSignin}
+                    signinErrorMsg={signinErrorMsg}
+                    isWaitingSignin={isWaitingSignin}
                     signinUser={this.signInUser.bind(this)}
                 />
             </Layout>

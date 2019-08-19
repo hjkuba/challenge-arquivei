@@ -4,9 +4,13 @@ import indexedDBService from './indexedDB-service';
 
 class FirebaseCloudFunctionsService {
     private baseUrl: string;
+    private headers: Record<string, string>;
 
     public constructor(baseUrl: string) {
         this.baseUrl = baseUrl;
+        this.headers = {
+            'Content-type': 'application/json',
+        };
     }
 
     public async signup(credentials: Credentials, company: Company): Promise<any> {
@@ -18,9 +22,7 @@ class FirebaseCloudFunctionsService {
                     ...company,
                 },
                 {
-                    headers: {
-                        'Content-type': 'application/json',
-                    },
+                    headers: this.headers,
                 },
             );
 
@@ -41,7 +43,7 @@ class FirebaseCloudFunctionsService {
                 },
                 {
                     headers: {
-                        'Content-type': 'application/json',
+                        ...this.headers,
                         authorization: `${userAuthObj.stsTokenManager.accessToken}`,
                     },
                 },

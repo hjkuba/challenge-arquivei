@@ -1,10 +1,10 @@
 import { ReactElement, Component } from 'react';
-import Layout from '../components/Layout';
-import SignupView from '../views/SignupView';
 import { connect } from 'react-redux';
 import { createUser, resetSignupErrors } from '../actions/user-actions';
-import { Company, Credentials } from '../types';
 import { StoreState } from '../reducers';
+import SignupView from '../views/SignupView';
+import Layout from '../components/Layout';
+import { Company, Credentials } from '../types';
 
 interface ActionProps {
     createUser: Function;
@@ -30,11 +30,12 @@ class SignupPage extends Component<ActionProps & StateProps> {
     }
 
     public render(): ReactElement {
+        const { signupErrorMsg, isWaitingUserCreation } = this.props;
         return (
             <Layout>
                 <SignupView
-                    signupErrorMsg={this.props.signupErrorMsg}
-                    isWaitingUserCreation={this.props.isWaitingUserCreation}
+                    signupErrorMsg={signupErrorMsg}
+                    isWaitingUserCreation={isWaitingUserCreation}
                     createUser={this.createUser.bind(this)}
                 />
             </Layout>

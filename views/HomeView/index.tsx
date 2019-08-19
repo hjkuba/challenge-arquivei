@@ -1,17 +1,17 @@
 import { ReactElement } from 'react';
 import ProfilePartial from '../../partials/ProfilePartial';
 import PurchasePartial from '../../partials/PurchasePartial';
-import { styles } from './styles';
 import { Company, QueryPricing } from '../../types';
+import { styles } from './styles';
 
 interface Props {
-    onSignout: Function;
-    onQueryQtdChange: Function;
-    onPurchase: Function;
     company: Company;
     currentQueries: number;
     totalPrice: number;
     queryPriceMap: QueryPricing[];
+    onQueryQtdChange: Function;
+    onPurchase: Function;
+    onSignout: Function;
 }
 
 const HomeView = (props: Props): ReactElement => {

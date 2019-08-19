@@ -1,12 +1,12 @@
-import { ReactElement, Component } from 'react';
-import Layout from '../components/Layout';
-import CheckoutView from '../views/CheckoutView';
-import { connect } from 'react-redux';
-import { StoreState } from '../reducers';
-import { checkAuth } from '../actions/auth-actions';
-import Loader from '../components/Loader';
 import Router from 'next/router';
+import { ReactElement, Component } from 'react';
+import { connect } from 'react-redux';
+import { checkAuth } from '../actions/auth-actions';
 import { buyQueries, backToDashboard, resetCheckoutErrors } from '../actions/checkout-actions';
+import { StoreState } from '../reducers';
+import CheckoutView from '../views/CheckoutView';
+import Layout from '../components/Layout';
+import Loader from '../components/Loader';
 
 interface ActionProps {
     checkAuth: Function;
@@ -50,17 +50,19 @@ class CheckoutPage extends Component<ActionProps & StateProps> {
     }
 
     public render(): ReactElement {
+        const { checkoutErrorMsg, totalValue, queryQuantity, checkoutConfirmation, isWaitingPayment } = this.props;
+
         return (
             <Layout>
                 {this.props.isLogged ? (
                     <CheckoutView
-                        checkoutErrorMsg={this.props.checkoutErrorMsg}
-                        onPaymentConfirmation={this.handlePaymentConfirmation.bind(this)}
+                        checkoutErrorMsg={checkoutErrorMsg}
+                        totalValue={totalValue}
+                        queryQuantity={queryQuantity}
+                        isConfirmed={checkoutConfirmation}
+                        isWaitingPayment={isWaitingPayment}
                         onBackToDashboard={this.handleBackToDashBoard.bind(this)}
-                        totalValue={this.props.totalValue}
-                        queryQuantity={this.props.queryQuantity}
-                        isConfirmed={this.props.checkoutConfirmation}
-                        isWaitingPayment={this.props.isWaitingPayment}
+                        onPaymentConfirmation={this.handlePaymentConfirmation.bind(this)}
                     />
                 ) : (
                     <Loader />

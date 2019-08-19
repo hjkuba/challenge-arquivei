@@ -1,8 +1,8 @@
 import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import firebase from '../services/firebase';
-import { Promotion, Company } from '../types';
+import firebase from '../services/firebase-service';
 import { generateQueryPriceMap, toNumber, calculateTotalPrice } from '../helpers/purchase-price';
+import { Promotion, Company } from '../types';
 
 export enum PurchaseActionTypes {
     QUERY_QTD_CHANGE = 'QUERY_QTD_CHANGE',

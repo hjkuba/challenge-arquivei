@@ -4,27 +4,35 @@ import CheckoutConfirmationPartial from '../../partials/CheckoutConfirmationPart
 import { styles } from './styles';
 
 interface Props {
-    onPaymentConfirmation: Function;
-    onBackToDashboard: Function;
     isConfirmed: boolean;
     totalValue: number;
     queryQuantity: number;
     isWaitingPayment: boolean;
     checkoutErrorMsg: string;
+    onBackToDashboard: Function;
+    onPaymentConfirmation: Function;
 }
 
-const CheckoutView = (props: Props): ReactElement => {
+const CheckoutView = ({
+    isConfirmed,
+    totalValue,
+    queryQuantity,
+    isWaitingPayment,
+    checkoutErrorMsg,
+    onBackToDashboard,
+    onPaymentConfirmation,
+}: Props): ReactElement => {
     return (
         <div className="checkout-view">
-            {props.isConfirmed ? (
-                <CheckoutConfirmationPartial onBackToDashboard={props.onBackToDashboard} />
+            {isConfirmed ? (
+                <CheckoutConfirmationPartial onBackToDashboard={onBackToDashboard} />
             ) : (
                 <CheckoutPartial
-                    onPaymentConfirmation={props.onPaymentConfirmation}
-                    totalValue={props.totalValue}
-                    queryQuantity={props.queryQuantity}
-                    isWaitingPayment={props.isWaitingPayment}
-                    checkoutErrorMsg={props.checkoutErrorMsg}
+                    onPaymentConfirmation={onPaymentConfirmation}
+                    totalValue={totalValue}
+                    queryQuantity={queryQuantity}
+                    isWaitingPayment={isWaitingPayment}
+                    checkoutErrorMsg={checkoutErrorMsg}
                 />
             )}
             <style jsx>{styles}</style>

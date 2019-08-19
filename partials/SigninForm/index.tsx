@@ -1,17 +1,17 @@
 import { ReactElement, useState, ChangeEvent } from 'react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { styles } from './styles';
 import Loader from '../../components/Loader';
 import Alert from '../../components/Alert';
+import { styles } from './styles';
 
 interface Props {
-    onSubmit: Function;
-    isLoading?: boolean;
     errorMsg: string;
+    isLoading?: boolean;
+    onSubmit: Function;
 }
 
-const SigninForm = (props: Props): ReactElement => {
+const SigninForm = ({ errorMsg, isLoading, onSubmit }: Props): ReactElement => {
     const [credentials, setCredentials] = useState({
         email: '',
         password: '',
@@ -23,12 +23,12 @@ const SigninForm = (props: Props): ReactElement => {
     }
 
     function handleSubmit(): void {
-        props.onSubmit(credentials);
+        onSubmit(credentials);
     }
 
     return (
         <div className="signin-form">
-            {props.errorMsg ? <Alert type={Alert.types.ERROR}>{props.errorMsg}</Alert> : null}
+            {errorMsg ? <Alert type={Alert.types.ERROR}>{errorMsg}</Alert> : null}
             <Input
                 name="email"
                 onChange={handleChange}
@@ -43,7 +43,7 @@ const SigninForm = (props: Props): ReactElement => {
                 label="Senha"
                 type={Input.types.PASSWORD}
             />
-            {props.isLoading ? (
+            {isLoading ? (
                 <Loader size={Loader.sizes.SMALL} />
             ) : (
                 <Button onClick={handleSubmit} label="Entrar" type={Button.types.PRIMARY} />

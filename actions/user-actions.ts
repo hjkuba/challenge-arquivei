@@ -1,9 +1,9 @@
-import { Company, Credentials } from '../types';
-import firebase from '../services/firebase';
-import { ThunkDispatch, ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
-import firebaseCloudFunctionService from '../services/firebase-cloud-function-service';
+import { ThunkDispatch, ThunkAction } from 'redux-thunk';
 import { signOut } from './auth-actions';
+import firebase from '../services/firebase-service';
+import firebaseCloudFunctionService from '../services/firebase-cloud-function-service';
+import { Company, Credentials } from '../types';
 
 export enum UserActionTypes {
     COMPANY_FETCH = 'COMPANY_FETCH',
