@@ -1,5 +1,6 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/database';
 import { Company, Credentials, Promotion } from '../types';
 import firebaseConfig from '../firebase-config.json';
 
@@ -7,11 +8,11 @@ const firebaseApp: firebase.app.App = !firebase.apps.length ? firebase.initializ
 
 class FirebaseService {
     private firebaseAuth: firebase.auth.Auth;
-    // private firebaseDatabase: firebase.firestore.Firestore;
+    private firebaseDatabase: firebase.database.Database;
 
     public constructor() {
         this.firebaseAuth = firebaseApp.auth();
-        // this.firebaseDatabase = firebaseApp.firestore();
+        this.firebaseDatabase = firebaseApp.database();
     }
 
     public async checkAuthentication(): Promise<firebase.User | null> {
@@ -39,45 +40,40 @@ class FirebaseService {
     }
 
     public async fetchCompanyInfo(userId: string): Promise<any> {
-        return Promise.resolve();
-        // try {
-        //     return await this.firebaseDatabase
-        //         .collection('users')
-        //         .doc(userId)
-        //         .get()
-        //         .then((snapshot): firebase.firestore.DocumentData | undefined => snapshot.data())
-        //         .then(
-        //             (data): Company => {
-        //                 if (!data) {
-        //                     throw new Error('Company not found');
-        //                 }
+        try {
+            return await this.firebaseDatabase
+                .ref(`users/${userId}`)
+                .once('value')
+                .then((snapshot): any => snapshot.val())
+                .then(
+                    (data): Company => {
+                        if (!data) {
+                            throw new Error('Company not found');
+                        }
 
-        //                 return data as Company;
-        //             },
-        //         );
-        // } catch (err) {
-        //     throw err;
-        // }
+                        return data as Company;
+                    },
+                );
+        } catch (err) {
+            throw err;
+        }
     }
 
     public async fetchPromotion(): Promise<any> {
-        return Promise.resolve();
-        // try {
-        //     return await this.firebaseDatabase
-        //         .collection('promotions')
-        //         .doc('first2000')
-        //         .get()
-        //         .then((snapshot): firebase.firestore.DocumentData | undefined => snapshot.data())
-        //         .then((data): any => {
-        //             if (!data) {
-        //                 throw new Error('Promotion not found');
-        //             }
-
-        //             return data as Promotion;
-        //         });
-        // } catch (err) {
-        //     throw err;
-        // }
+        try {
+            return await this.firebaseDatabase
+                .ref('promotions/first2000')
+                .once('value')
+                .then((snapshot): any => snapshot.val())
+                .then((data): any => {
+                    if (!data) {
+                        throw new Error('Promotion not found');
+                    }
+                    return data as Promotion;
+                });
+        } catch (err) {
+            throw err;
+        }
     }
 }
 
